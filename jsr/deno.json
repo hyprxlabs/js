@@ -7,7 +7,8 @@
         "lineWidth": 100
     },
     "workspace": [
-        "./testing"
+        "./assert",
+        "./testing" 
     ],
     "publish": {
         "exclude": [

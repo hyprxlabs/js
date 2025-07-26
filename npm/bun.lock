@@ -2,6 +2,13 @@
   "lockfileVersion": 1,
   "workspaces": {
     "": {},
+    "assert": {
+      "name": "@hyprx/assert",
+      "version": "0.0.0-alpha.0",
+      "devDependencies": {
+        "@hyprx/testing": "^0.0.0-alpha.0",
+      },
+    },
     "testing": {
       "name": "@hyprx/testing",
       "version": "0.0.0-alpha.0",
@@ -12,6 +19,8 @@
     },
   },
   "packages": {
+    "@hyprx/assert": ["@hyprx/assert@workspace:assert"],
+
     "@hyprx/testing": ["@hyprx/testing@workspace:testing"],
 
     "@types/node": ["@types/node@22.16.5", "", { "dependencies": { "undici-types": "~6.21.0" } }, "sha512-bJFoMATwIGaxxx8VJPeM8TonI8t579oRvgAuT8zFugJsJZgzqv0Fu8Mhp68iecjzG7cnN3mO2dJQ5uUM2EFrgQ=="],
