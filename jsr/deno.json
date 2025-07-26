@@ -1,0 +1,20 @@
+{
+    "fmt": {
+        "exclude": [
+            "**/*.md"
+        ],
+        "indentWidth": 4,
+        "lineWidth": 100
+    },
+    "workspace": [
+        "./testing",
+        "./assert"
+    ],
+    "publish": {
+        "exclude": [
+            "node_modules",
+            "**/*.test.ts",
+            "**/dnt.ts"
+        ]
+    }
+}

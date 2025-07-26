@@ -1,0 +1,11 @@
+{
+    "deno.enable": true,
+    "deno.disablePaths": [
+        "./npm"
+    ],
+    "debug.javascript.defaultRuntimeExecutable": {
+        "pwa-node": "/home/dev_user/.local/share/mise/shims/node"
+    },
+    "bun.runtime": "/home/dev_user/.local/share/mise/shims/bun",
+    "deno.path": "/home/dev_user/.local/share/mise/shims/deno"
+}

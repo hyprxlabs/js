@@ -1,0 +1,209 @@
+{
+  "version": "0.0.0-alpha.0",
+  "packageDefaults": {
+    "type": "module",
+    "license": "MIT",
+    "authors": [
+      {
+        "name": "hyprxdev",
+        "email": "dev@hyprx.dev"
+      }
+    ],
+    "scripts": {
+      "test": "node --test",
+      "test:bun": "bun test"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/hyprxland/js-hyprx.git"
+    },
+    "bugs": {
+      "url": "https://github.com/hyprxland/js-hyprx/discussions/categories/bugs"
+    },
+    "homepage": "hyperx.land",
+    "engines": {
+      "node": ">=22"
+    },
+    "copy": {
+      "README.md": "README.md",
+      "LICENSE.md": "LICENSE.md"
+    },
+    "rm": [
+      "test_runner.js",
+      "esm/_dnt.shims.js",
+      "types/_dnt.shims.d.ts",
+      "esm/internal/_dnt.shims.js",
+      "types/internal/_dnt.shims.d.ts"
+    ],
+    "devDependencies": {
+      "@types/node": "^22.14.1"
+    }
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "projects": [
+    {
+      "name": "testing",
+      "id": "@hyprx/testing",
+      "version": "0.0.0-alpha.0",
+      "dir": "jsr/testing",
+      "denoConfig": "jsr/testing/deno.json",
+      "dntConfig": "jsr/testing/dnt.json",
+      "packageJson": "npm/testing/package.json"
+    },
+    {
+      "name": "assert",
+      "id": "@hyprx/assert",
+      "version": "0.0.0-alpha.0",
+      "dir": "jsr/assert",
+      "denoConfig": "jsr/assert/deno.json",
+      "dntConfig": "jsr/assert/dnt.json",
+      "packageJson": "npm/assert/package.json"
+    },
+    {
+      "name": "chars",
+      "id": "@hyprx/chars",
+      "version": "0.0.0-alpha.0",
+      "dir": "jsr/chars",
+      "denoConfig": "jsr/chars/deno.json",
+      "dntConfig": "jsr/chars/dnt.json",
+      "packageJson": "npm/chars/package.json"
+    },
+    {
+      "name": "runtime-info",
+      "id": "@hyprx/runtime-info",
+      "version": "0.0.0-alpha.0",
+      "dir": "jsr/runtime-info",
+      "denoConfig": "jsr/runtime-info/deno.json",
+      "dntConfig": "jsr/runtime-info/dnt.json",
+      "packageJson": "npm/runtime-info/package.json"
+    },
+    {
+      "name": "path",
+      "id": "@hyprx/path",
+      "version": "0.0.0-alpha.0",
+      "dir": "jsr/path",
+      "denoConfig": "jsr/path/deno.json",
+      "dntConfig": "jsr/path/dnt.json",
+      "packageJson": "npm/path/package.json"
+    },
+    {
+      "name": "process",
+      "id": "@hyprx/process",
+      "version": "0.0.0-alpha.0",
+      "dir": "jsr/process",
+      "denoConfig": "jsr/process/deno.json",
+      "dntConfig": "jsr/process/dnt.json",
+      "packageJson": "npm/process/package.json"
+    },
+    {
+      "name": "slices",
+      "id": "@hyprx/slices",
+      "version": "0.0.0-alpha.0",
+      "dir": "jsr/slices",
+      "denoConfig": "jsr/slices/deno.json",
+      "dntConfig": "jsr/slices/dnt.json",
+      "packageJson": "npm/slices/package.json"
+    },
+    {
+      "name": "strings",
+      "id": "@hyprx/strings",
+      "version": "0.0.0-alpha.0",
+      "dir": "jsr/strings",
+      "denoConfig": "jsr/strings/deno.json",
+      "dntConfig": "jsr/strings/dnt.json",
+      "packageJson": "npm/strings/package.json"
+    },
+    {
+      "name": "fmt",
+      "id": "@hyprx/fmt",
+      "version": "0.0.0-alpha.0",
+      "dir": "jsr/fmt",
+      "denoConfig": "jsr/fmt/deno.json",
+      "dntConfig": "jsr/fmt/dnt.json",
+      "packageJson": "npm/fmt/package.json"
+    },
+    {
+      "name": "option",
+      "id": "@hyprx/option",
+      "version": "0.0.0-alpha.0",
+      "dir": "jsr/option",
+      "denoConfig": "jsr/option/deno.json",
+      "dntConfig": "jsr/option/dnt.json",
+      "packageJson": "npm/option/package.json"
+    },
+    {
+      "name": "result",
+      "id": "@hyprx/result",
+      "version": "0.0.0-alpha.0",
+      "dir": "jsr/result",
+      "denoConfig": "jsr/result/deno.json",
+      "dntConfig": "jsr/result/dnt.json",
+      "packageJson": "npm/result/package.json"
+    },
+    {
+      "name": "secrets",
+      "id": "@hyprx/secrets",
+      "version": "0.0.0-alpha.0",
+      "dir": "jsr/secrets",
+      "denoConfig": "jsr/secrets/deno.json",
+      "dntConfig": "jsr/secrets/dnt.json",
+      "packageJson": "npm/secrets/package.json"
+    },
+    {
+      "name": "env",
+      "id": "@hyprx/env",
+      "version": "0.0.0-alpha.0",
+      "dir": "jsr/env",
+      "denoConfig": "jsr/env/deno.json",
+      "dntConfig": "jsr/env/dnt.json",
+      "packageJson": "npm/env/package.json"
+    },
+    {
+      "name": "ansi",
+      "id": "@hyprx/ansi",
+      "version": "0.0.0-alpha.0",
+      "dir": "jsr/ansi",
+      "denoConfig": "jsr/ansi/deno.json",
+      "dntConfig": "jsr/ansi/dnt.json",
+      "packageJson": "npm/ansi/package.json"
+    },
+    {
+      "name": "fs",
+      "id": "@hyprx/fs",
+      "version": "0.0.0-alpha.0",
+      "dir": "jsr/fs",
+      "denoConfig": "jsr/fs/deno.json",
+      "dntConfig": "jsr/fs/dnt.json",
+      "packageJson": "npm/fs/package.json"
+    },
+    {
+      "name": "exec",
+      "id": "@hyprx/exec",
+      "version": "0.0.0-alpha.0",
+      "dir": "jsr/exec",
+      "denoConfig": "jsr/exec/deno.json",
+      "dntConfig": "jsr/exec/dnt.json",
+      "packageJson": "npm/exec/package.json"
+    },
+    {
+      "name": "dotenv",
+      "id": "@hyprx/dotenv",
+      "version": "0.0.0-alpha.0",
+      "dir": "jsr/dotenv",
+      "denoConfig": "jsr/dotenv/deno.json",
+      "dntConfig": "jsr/dotenv/dnt.json",
+      "packageJson": "npm/dotenv/package.json"
+    },
+    {
+      "name": "ci-env",
+      "id": "@hyprx/ci-env",
+      "version": "0.1.0",
+      "dir": "jsr/ci-env",
+      "denoConfig": "jsr/ci-env/deno.json",
+      "dntConfig": "jsr/ci-env/dnt.json",
+      "packageJson": "npm/ci-env/package.json"
+    }
+  ]
+}
