@@ -9,17 +9,27 @@
         "@hyprx/testing": "^0.0.0-alpha.0",
       },
     },
+    "chars": {
+      "name": "@hyprx/chars",
+      "version": "0.0.0-alpha.0",
+      "devDependencies": {
+        "@hyprx/assert": "^0.0.0-alpha.0",
+        "@hyprx/testing": "^0.0.0-alpha.0",
+        "picocolors": "^1.0.0",
+      },
+    },
     "testing": {
       "name": "@hyprx/testing",
       "version": "0.0.0-alpha.0",
       "devDependencies": {
         "@types/node": "^22.14.1",
-        "picocolors": "^1.0.0",
       },
     },
   },
   "packages": {
     "@hyprx/assert": ["@hyprx/assert@workspace:assert"],
+
+    "@hyprx/chars": ["@hyprx/chars@workspace:chars"],
 
     "@hyprx/testing": ["@hyprx/testing@workspace:testing"],
 

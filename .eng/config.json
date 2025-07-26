@@ -60,6 +60,15 @@
       "denoConfig": "jsr/assert/deno.json",
       "dntConfig": "jsr/assert/dnt.json",
       "packageJson": "npm/assert/package.json"
+    },
+    {
+      "name": "chars",
+      "id": "@hyprx/chars",
+      "version": "0.0.0-alpha.0",
+      "dir": "jsr/chars",
+      "denoConfig": "jsr/chars/deno.json",
+      "packageJson": "npm/chars/package.json",
+      "dntConfig": "jsr/chars/dnt.json"
     }
   ]
 }

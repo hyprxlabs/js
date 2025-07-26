@@ -1,7 +1,8 @@
-import { join } from "node:path";
+import path, { join } from "node:path";
 import { getConfig, Project, setConfig } from "./config.ts";
 import { jsrDir, npmDir, projectRootDir } from "./paths.ts"
 import { globToRegExp, relative } from "jsr:@std/path@1"
+import { exists } from "jsr:@bearz/fs@0.1";
 
 
 export async function filter(projects: Project[], filter?: string[], changes = true) {
@@ -55,8 +56,6 @@ export async function syncProjects() {
     }
 
     const mainDenoConfigPath = join(jsrDir, "deno.json");
-    // deno-lint-ignore no-explicit-any
-    const mainDenoConfig =  JSON.parse(Deno.readTextFileSync(mainDenoConfigPath)) as Record<string, any>;
 
     console.log(`Syncing projects from ${jsrDir} and ${npmDir}`);
     for await (const dirEntry of Deno.readDir(jsrDir)) {
@@ -74,52 +73,97 @@ export async function syncProjects() {
             const projectName = dirEntry.name;
             const projectDir = join(jsrDir, projectName); 
             const project = projects.find((p) => p.name === projectName);
-            const denoConfigPath = join(projectDir, "deno.json");
-            const packageJsonPath = join(npmDir, projectName, "package.json");
-            const dntConfigPath = join(projectDir, "dnt.json");
+            const denoConfigFullPath = join(projectDir, "deno.json");
+            const packageJsonFullPath = join(npmDir, projectName, "package.json");
+            const dntConfigFullPath = join(projectDir, "dnt.json");
 
-            const hasDenoConfig = await Deno.stat(denoConfigPath).then(() => true).catch(() => false);
-            const hasDntConfig = await Deno.stat(dntConfigPath).then(() => true).catch(() => false);
-            const hasPackageJson = await Deno.stat(packageJsonPath).then(() => true).catch(() => false);
+            const rootDenoConfigPath = join(projectRootDir, "jsr", "deno.json");
+            const rootPackageConfigPath = join(projectRootDir, "npm", "package.json");
 
+            const hasDenoConfig = await Deno.stat(denoConfigFullPath).then(() => true).catch(() => false);
+            const hasDntConfig = await Deno.stat(dntConfigFullPath).then(() => true).catch(() => false);
+            let hasPackageJson = await Deno.stat(packageJsonFullPath).then(() => true).catch(() => false);
+
+            const dntConfig = hasDntConfig ? JSON.parse(Deno.readTextFileSync(dntConfigFullPath)) : undefined;
+            if (dntConfig === undefined || dntConfig.npmIgnore === undefined || dntConfig.npmIgnore !== true) {
+                if (!hasPackageJson) {
+                    const packageJsonContent = "{}";
+                    const packageJsonDir = path.dirname(packageJsonFullPath);
+                    if (!await exists(packageJsonDir)) {
+                        await Deno.mkdir(packageJsonDir, { recursive: true });
+                    }
+
+                    await Deno.writeTextFile(packageJsonFullPath, packageJsonContent);
+                        hasPackageJson = true;
+                }
+            }
+
+            const denoConfig = hasDenoConfig ? relative(projectRootDir, denoConfigFullPath) : undefined;
+            const packageJsonPath = hasPackageJson ? relative(projectRootDir, packageJsonFullPath) : undefined
+            const dntConfigFilePath = hasDntConfig ? relative(projectRootDir, dntConfigFullPath) : undefined;
+
+            const rootDenoConfig = JSON.parse(Deno.readTextFileSync(rootDenoConfigPath));
+            const rootPackageConfig = JSON.parse(Deno.readTextFileSync(rootPackageConfigPath));
+            
             if (!hasDenoConfig) {
                 continue;
             }
 
             if (!project && hasDenoConfig) {
-                if (!mainDenoConfig.workspace.includes(`./${projectName}`)) {
-                    mainDenoConfig.workspace.push(`./${projectName}`);
+                if (rootDenoConfig.workspace === undefined) {
+                    rootDenoConfig.workspace = [];
+                }
 
-                    await Deno.writeTextFile(mainDenoConfigPath, JSON.stringify(mainDenoConfig, null, 4));
+                if (!rootDenoConfig.workspace.includes(`./${projectName}`)) {
+                    rootDenoConfig.workspace.push(`./${projectName}`);
+
+                    await Deno.writeTextFile(rootDenoConfigPath, JSON.stringify(rootDenoConfig, null, 4));
+                }
+
+                if (hasPackageJson && rootPackageConfig.workspaces === undefined) {
+                    rootPackageConfig.workspaces = [];
+                }
+
+                if (hasPackageJson && !rootPackageConfig.workspaces.includes(`./${projectName}`)) {
+                    rootPackageConfig.workspaces.push(`./${projectName}`);
+
+                    await Deno.writeTextFile(rootPackageConfigPath, JSON.stringify(rootPackageConfig, null, 4));
                 }
                
                 // deno-lint-ignore no-explicit-any
-                const cfg = JSON.parse(Deno.readTextFileSync(denoConfigPath)) as Record<string, any>;
+                const cfg = JSON.parse(Deno.readTextFileSync(denoConfigFullPath)) as Record<string, any>;
+
+                let packageDir : string | undefined = undefined;
+                if (hasPackageJson) {
+                    packageDir = path.dirname(packageJsonFullPath);
+                }
 
                 projects.push({
                     name: projectName,
                     id: cfg?.name,
                     version: cfg?.version,
                     dir: relative(projectRootDir, projectDir),
-                    denoConfig: hasDenoConfig ? relative(projectRootDir, denoConfigPath) : undefined,
-                    packageJson: hasPackageJson ? relative(projectRootDir, packageJsonPath) : undefined,
-                    dntConfig: hasDntConfig ? relative(projectRootDir, dntConfigPath) : undefined,
+                    denoConfig: denoConfig,
+                    packageJson: packageJsonPath,
+                    dntConfig:  dntConfigFilePath,
                 });
 
-
+                if (packageDir && !await exists(packageDir)) {
+                    await Deno.mkdir(packageDir, { recursive: true });
+                }
 
             } else {
                 console.log(`Project ${projectName} already exists in config`);
                 if (project && project.packageJson === undefined && hasPackageJson) {
-                    project.packageJson = relative(projectRootDir, packageJsonPath);
+                    project.packageJson = relative(projectRootDir, packageJsonFullPath);
                 }
 
                 if (project && project.dntConfig === undefined && hasDntConfig) {
-                    project.dntConfig = relative(projectRootDir, dntConfigPath);
+                    project.dntConfig = relative(projectRootDir, dntConfigFullPath);
                 }
 
                 if (project && hasDenoConfig) {
-                    const cfg = JSON.parse(Deno.readTextFileSync(denoConfigPath));
+                    const cfg = JSON.parse(Deno.readTextFileSync(denoConfigFullPath));
                     if (cfg.version && project.version !== cfg.version) {
                         project.version = cfg.version;
                     }
