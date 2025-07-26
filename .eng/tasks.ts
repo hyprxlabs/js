@@ -31,9 +31,20 @@ task({
         const projects = getConfig().projects;
         let projectNames : Array<string>  | undefined = undefined;
 
-        if (parsed.all) {
+        if (parsed.all || (ctx.args && (ctx.args.includes("--all")))) {
             projectNames = projects.map((p) => p.name);
+        } else {
+            projectNames = [];
+            for (const arg of ctx.args!) {
+                const project = projects.find((p) => p.name === arg);
+                if (project) {
+                    projectNames.push(project.name);
+                }
+            }
         }
+
+        console.log(projects);
+        console.log(projectNames);
 
         await runDnt(projectNames);
     }

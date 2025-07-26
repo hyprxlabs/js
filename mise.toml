@@ -12,3 +12,23 @@ deno run -A ./.eng/main.ts projects:sync
 run= """
 deno run -A ./.eng/main.ts projects:list
 """
+
+[tasks.dnt]
+run= """
+deno run -A ./.eng/main.ts dnt
+"""
+
+[tasks.fmt]
+run= """
+deno run -A ./.eng/main.ts fmt
+"""
+
+[tasks.lint]
+run= """
+deno run -A ./.eng/main.ts lint
+"""
+
+[tasks.test]
+run= """
+deno run -A ./.eng/main.ts test
+"""

@@ -187,6 +187,7 @@ export async function runDnt(projectNames?: string[]) : Promise<void> {
                 name: dntConfig.name ?? denoConfig.name,
                 version: dntConfig.version ?? denoConfig.version ?? baseVersion,
                 type: "module",
+                icon: dntConfig.icon ?? undefined,
                 description: dntConfig.description,
                 keywords: dntConfig.keywords,
                 license: dntConfig.license,

@@ -1,0 +1,17 @@
+{
+    "description": "Cross runtime testing shim for NodeJs, Bun, and Deno's testing APIs.",
+    "keywords": [
+        "testing",
+        "tests",
+        "cross-runtime"
+    ],
+    "icon": "https://raw.githubusercontent.com/hyprxlabs/js/refs/heads/main/.eng/assets/logo.png",
+    "copy": {
+        "globals.d.ts": "./types/globals.d.ts",
+        "globals.js": "./esm/globals.js"
+    },
+    "rm": [
+        "esm/_dnt.shims.js",
+        "types/_dnt.shims.d.ts"
+    ]
+}
