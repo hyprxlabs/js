@@ -8,6 +8,11 @@ run= """
 deno run -A ./.eng/main.ts projects:sync
 """
 
+[tasks.docs-mod]
+run= """
+deno run -A ./.eng/main.ts docs:mod
+"""
+
 [tasks.projects-list]
 run= """
 deno run -A ./.eng/main.ts projects:list
@@ -31,4 +36,9 @@ deno run -A ./.eng/main.ts lint
 [tasks.test]
 run= """
 deno run -A ./.eng/main.ts test
+"""
+
+[tasks.update-version]
+run= """
+deno run -A ./.eng/main.ts version:update
 """

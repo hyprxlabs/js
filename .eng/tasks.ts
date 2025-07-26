@@ -8,6 +8,8 @@ import { dirname } from "jsr:@std/path@1";
 import { basename, resolve } from "node:path";
 import { expandGlobSync } from "jsr:@std/fs@1";
 import { blue } from "jsr:@std/fmt@1/colors";
+import { updateModDocumentation } from "./tasks/docs.ts";
+import { updateVersions } from "./tasks/versions.ts";
 task("default", () => {
     console.log("Hello from Hyprx!"); 
 });
@@ -19,6 +21,20 @@ task({
         await syncProjects();
     },
 });
+
+task({
+    id: "docs:mod",
+    description: "Update the mod.ts documentation from the README.md",
+    async run(ctx) {
+        let targets: string | string[] = ctx.args ?? [];
+        if (ctx.args && ctx.args.includes("--all") || ctx.args?.includes("-a")) {
+            const projects = getConfig().projects.map((p) => p.name);
+            targets = projects;
+        }
+
+        await updateModDocumentation(targets);
+    }
+})
 
 task({
     id: "dnt",
@@ -57,6 +73,20 @@ task({
         listProjects()
     },
 });
+
+task({
+    id: "version:update",
+    description: "Update project versions",
+    async run(ctx) {
+        let targets: string | string[] = ctx.args ?? [];
+        if (ctx.args && ctx.args.includes("--all") || ctx.args?.includes("-a")) {
+            const projects = getConfig().projects.map((p) => p.name);
+            targets = projects;
+        }
+
+        await updateVersions(targets);
+    }
+})
 
 task({
     id: "fmt",
@@ -263,3 +293,4 @@ task({
 
     }
 })
+

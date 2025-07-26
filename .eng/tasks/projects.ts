@@ -55,7 +55,6 @@ export async function syncProjects() {
         excludedDirs.push("node_modules");
     }
 
-    const mainDenoConfigPath = join(jsrDir, "deno.json");
 
     console.log(`Syncing projects from ${jsrDir} and ${npmDir}`);
     for await (const dirEntry of Deno.readDir(jsrDir)) {

@@ -7,8 +7,10 @@
     "jsr:@bearz/dotenv@0.1": "0.1.0",
     "jsr:@bearz/env@~0.1.3": "0.1.3",
     "jsr:@bearz/fmt@0.1": "0.1.0",
+    "jsr:@bearz/fs@*": "0.1.0",
     "jsr:@bearz/fs@0.1": "0.1.0",
     "jsr:@bearz/option@^0.0.0": "0.0.0",
+    "jsr:@bearz/path@*": "0.0.0",
     "jsr:@bearz/path@^0.0.0": "0.0.0",
     "jsr:@bearz/process@0.1": "0.1.0",
     "jsr:@bearz/result@^0.0.0": "0.0.0",
@@ -61,7 +63,7 @@
         "jsr:@bearz/dotenv",
         "jsr:@bearz/env",
         "jsr:@bearz/fmt",
-        "jsr:@bearz/fs",
+        "jsr:@bearz/fs@0.1",
         "jsr:@bearz/secrets"
       ]
     },
@@ -89,7 +91,7 @@
     "@bearz/fs@0.1.0": {
       "integrity": "424d501ec9446ee4206e0ff2d5a87220f0e8e80e2138ef2f80992bb30c19b063",
       "dependencies": [
-        "jsr:@bearz/path"
+        "jsr:@bearz/path@^0.0.0"
       ]
     },
     "@bearz/option@0.0.0": {
@@ -175,8 +177,8 @@
         "jsr:@bearz/ci-env",
         "jsr:@bearz/dotenv",
         "jsr:@bearz/env",
-        "jsr:@bearz/fs",
-        "jsr:@bearz/path",
+        "jsr:@bearz/fs@0.1",
+        "jsr:@bearz/path@^0.0.0",
         "jsr:@bearz/process",
         "jsr:@bearz/result",
         "jsr:@bearz/strings",
