@@ -10,7 +10,7 @@ The module will handle characters outside latin and ascii such as
 Cyrillic or Greek characters. The chars library is heavily based on golang's
 unicode module.
 
-![logo](https://raw.githubusercontent.com/hyprxlabs/js-hyprx/refs/heads/main/assets/logo.png)
+![logo](https://raw.githubusercontent.com/hyprxlabs/js/refs/heads/main/.eng/assets/logo.png)
 
 [![JSR](https://jsr.io/badges/@hyprx/chars)](https://jsr.io/@hyprx/chars)
 [![npm version](https://badge.fury.io/js/@hyprx%2Fchars.svg)](https://badge.fury.io/js/@hyprx%2Fchars)

@@ -9,7 +9,7 @@ packages.
 The overall goal here is to make it easier to write javascript libaries
 that target multiple JavaScript runtimes.
 
-![logo](https://raw.githubusercontent.com/hyprxlabs/js-hyprx/refs/heads/main/assets/logo.png)
+![logo](https://raw.githubusercontent.com/hyprxlabs/js/refs/heads/main/.eng/assets/logo.png)
 
 [![JSR](https://jsr.io/badges/@hyprx/assert)](https://jsr.io/@hyprx/assert)
 [![npm version](https://badge.fury.io/js/@hyprx%2Fassert.svg)](https://badge.fury.io/js/@hyprx%2Fassert)
