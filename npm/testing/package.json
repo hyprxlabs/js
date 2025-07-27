@@ -1,42 +1,42 @@
 {
-    "name": "@hyprx/testing",
-    "version": "0.0.0-alpha.0",
-    "description": "Cross runtime testing shim for NodeJs, Bun, and Deno's testing APIs.",
-    "keywords": [
-        "testing",
-        "tests",
-        "cross-runtime"
-    ],
-    "homepage": "js.hyprxlabs.com",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/hyprxlabs/js.git"
-    },
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/hyprxlabs/js/discussions/categories/bugs"
-    },
-    "module": "./esm/mod.js",
-    "types": "./types/mod.d.ts",
-    "exports": {
-        ".": {
-            "import": {
-                "types": "./types/mod.d.ts",
-                "default": "./esm/mod.js"
-            }
-        }
-    },
-    "scripts": {
-        "test": "node --test",
-        "test:bun": "bun test"
-    },
-    "type": "module",
-    "icon": "https://raw.githubusercontent.com/hyprxlabs/js/refs/heads/main/.eng/assets/logo.png",
-    "engines": {
-        "node": ">=22"
-    },
-    "devDependencies": {
-        "@types/node": "^22.14.1"
-    },
-    "_generatedBy": "dnt@dev"
+  "name": "@hyprx/testing",
+  "version": "0.0.0-alpha.0",
+  "description": "Cross runtime testing shim for NodeJs, Bun, and Deno's testing APIs.",
+  "keywords": [
+    "testing",
+    "tests",
+    "cross-runtime"
+  ],
+  "homepage": "js.hyprxlabs.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hyprxlabs/js.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hyprxlabs/js/discussions/categories/bugs"
+  },
+  "module": "./esm/mod.js",
+  "types": "./types/mod.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./types/mod.d.ts",
+        "default": "./esm/mod.js"
+      }
+    }
+  },
+  "scripts": {
+    "test": "node --test",
+    "test:bun": "bun test"
+  },
+  "type": "module",
+  "icon": "https://raw.githubusercontent.com/hyprxlabs/js/refs/heads/main/.eng/assets/logo.png",
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.1"
+  },
+  "_generatedBy": "dnt@dev"
 }

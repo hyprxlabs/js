@@ -5,7 +5,7 @@ import { jsrDir, npmDir, projectRootDir } from "./tasks/paths.ts";
 import { parseArgs } from "jsr:@std/cli@1"
 import { getConfig, Project } from "./tasks/config.ts";
 import { dirname } from "jsr:@std/path@1";
-import { basename, resolve } from "node:path";
+import { basename, join, resolve } from "node:path";
 import { expandGlobSync } from "jsr:@std/fs@1";
 import { blue } from "jsr:@std/fmt@1/colors";
 import { updateModDocumentation } from "./tasks/docs.ts";
@@ -170,6 +170,108 @@ task({
 });
 
 task({
+    id: "jsr:publish",
+    description: "Dry run for publishing the jsr package to deno.land",
+    async run() {
+
+        const isWindows = Deno.build.os === "windows";
+        const deno = isWindows ? "deno.exe" : "deno";
+
+        const cmd = new Deno.Command(deno, {
+            args: ["publish"],
+            stdout: "inherit",
+            stderr: "inherit",
+            cwd: jsrDir
+        });
+        const o = await cmd.output();
+        if (o.code !== 0) {
+            throw new Error(`Failed to publish to jsr.io`);
+        }
+    }
+})
+
+task({
+    id: "jsr:publish:dry",
+    description: "Dry run for publishing the jsr package to deno.land",
+    async run() {
+
+        const isWindows = Deno.build.os === "windows";
+        const deno = isWindows ? "deno.exe" : "deno";
+
+        const cmd = new Deno.Command(deno, {
+            args: ["publish", "--dry-run", "--allow-dirty"],
+            stdout: "inherit",
+            stderr: "inherit",
+            cwd: jsrDir
+        });
+        const o = await cmd.output();
+        if (o.code !== 0) {
+            throw new Error(`Failed to publish to jsr.io`);
+        }
+    }
+})
+
+task({
+    id: "npm:publish:dry",
+    description: "Dry run for publishing the npm package",
+    async run() {
+        const isWindows = Deno.build.os === "windows";
+        const npm = isWindows ? "npm.cmd" : "npm";
+
+        const cmd = new Deno.Command(npm, {
+            args: ["publish", "--dry-run"],
+            stdout: "inherit",
+            stderr: "inherit",
+            cwd: npmDir
+        });
+        const o = await cmd.output();
+        if (o.code !== 0) {
+            throw new Error(`Failed to publish to npm`);
+        }
+    }
+});
+
+task({
+    id: "npm:publish",
+    description: "Publish the npm package",
+    async run() {
+        const isWindows = Deno.build.os === "windows";
+        const npm = isWindows ? "npm.cmd" : "npm";
+
+        const cmd = new Deno.Command(npm, {
+            args: ["publish", "--provenance", "--access", "public"],
+            stdout: "inherit",
+            stderr: "inherit",
+            cwd: npmDir
+        });
+        const o = await cmd.output();
+        if (o.code !== 0) {
+            throw new Error(`Failed to publish to npm`);
+        }
+    }
+});
+
+task({
+    id: "npm:audit",
+    description: "Run npm audit",
+    async run() {
+        const isWindows = Deno.build.os === "windows";
+        const npm = isWindows ? "npm.cmd" : "npm";
+
+        const cmd = new Deno.Command(npm, {
+            args: ["audit"],
+            stdout: "inherit",
+            stderr: "inherit",
+            cwd: npmDir
+        });
+        const o = await cmd.output();
+        if (o.code !== 0) {
+            throw new Error(`Failed to run npm audit`);
+        }
+    }
+})
+
+task({
     id: "test",
     description: "Run the tests",
     async run(ctx) {
@@ -269,13 +371,15 @@ task({
                 if (project.packageJson) {
                     console.log("")
                     console.log(blue("# " + (project.id ?? project.name)));
-                    const dir = dirname(project.packageJson)
+                    const dir = join(projectRootDir, dirname(project.packageJson))
+                    console.log("bun test", dir);;
                     for (const fi of expandGlobSync("**/*.test.js",  { includeDirs: false, root: dir })) {
+                         console.log("bun test", fi.path);
                         const cmd = new Deno.Command("bun", {
                             args: ["test", fi.path],
                             stdout: "inherit",
                             stderr: "inherit",
-                            cwd: resolve(projectRootDir, dir),
+                            cwd: dir,
                         });
                         const o = await cmd.output();
                         if (o.code !== 0) {

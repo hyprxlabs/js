@@ -1,6 +1,6 @@
 # MIT License
 
-Copyright 2022-2025  hyprx.land hyprdev
+Copyright 2022-2025 Hyprx Labs and Hyprx Dev
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the “Software”), to deal in

@@ -1,4 +1,4 @@
-import { join, resolve } from "jsr:@bearz/path";
+import { join } from "jsr:@bearz/path";
 import { exists} from "jsr:@bearz/fs";
 import { getConfig } from "./config.ts";
 import { projectRootDir } from "./paths.ts";
@@ -72,4 +72,3 @@ ${modContent}`;
            // Update the documentation for each target
     }
 }
-
