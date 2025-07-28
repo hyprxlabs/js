@@ -36,6 +36,10 @@ jobs:
         with:
           node-version: "22.x"
 
+      - name: Bun Install
+        run: bun install
+        working-directory: npm
+
       - name: Test
         run: deno run -A ./.eng/main.ts test --all
 
