@@ -35,6 +35,17 @@
       "devDependencies": {
         "@hyprx/assert": "^0.0.0-alpha.0",
         "@hyprx/testing": "^0.0.0-alpha.0",
+      },
+    },
+    "strings": {
+      "name": "@hyprx/strings",
+      "version": "0.0.0-alpha.0",
+      "dependencies": {
+        "@hyprx/slices": "^0.0.0-alpha.0",
+      },
+      "devDependencies": {
+        "@hyprx/assert": "^0.0.0-alpha.0",
+        "@hyprx/testing": "^0.0.0-alpha.0",
         "picocolors": "^1.0.0",
       },
     },
@@ -54,6 +65,8 @@
     "@hyprx/globals": ["@hyprx/globals@workspace:globals"],
 
     "@hyprx/slices": ["@hyprx/slices@workspace:slices"],
+
+    "@hyprx/strings": ["@hyprx/strings@workspace:strings"],
 
     "@hyprx/testing": ["@hyprx/testing@workspace:testing"],
 

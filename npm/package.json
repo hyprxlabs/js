@@ -1,6 +1,5 @@
 {
   "private": true,
-
   "scripts": {
     "test": "node --test",
     "test:bun": "bun test"
@@ -10,6 +9,7 @@
     "./assert",
     "./chars",
     "./globals",
-    "./slices"
+    "./slices",
+    "./strings"
   ]
 }

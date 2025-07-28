@@ -11,7 +11,8 @@
         "./testing",
         "./chars",
         "./globals",
-        "./slices"
+        "./slices",
+        "./strings"
     ],
     "publish": {
         "exclude": [

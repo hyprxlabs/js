@@ -27,7 +27,7 @@
  * perform case insensitive comparisons over strings or CharSliceLike
  * objects such as CharSlice or Uint32Arrays.
  *
- * ![logo](https://raw.githubusercontent.com/hyprxlabs/js/refs/heads/main/assets/logo.png)
+ * ![logo](https://raw.githubusercontent.com/hyprxlabs/js/refs/heads/main/.eng/assets/logo.png)
  *
  * [![JSR](https://jsr.io/badges/@hyprx/slices)](https://jsr.io/@hyprx/slices)
  * [![npm version](https://badge.fury.io/js/@hyprx%2Fslices.svg)](https://badge.fury.io/js/@hyprx%2Fslices)
@@ -100,6 +100,7 @@
  * ## License
  *
  * [MIT License](./LICENSE.md)
+ *
  * @module
  */
 export * from "./camelize.js";

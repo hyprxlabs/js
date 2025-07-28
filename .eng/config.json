@@ -87,6 +87,15 @@
       "denoConfig": "jsr/globals/deno.json",
       "packageJson": "npm/globals/package.json",
       "dntConfig": "jsr/globals/dnt.json"
+    },
+    {
+      "name": "strings",
+      "id": "@hyprx/strings",
+      "version": "0.0.0-alpha.0",
+      "dir": "jsr/strings",
+      "denoConfig": "jsr/strings/deno.json",
+      "packageJson": "npm/strings/package.json",
+      "dntConfig": "jsr/strings/dnt.json"
     }
   ]
 }
