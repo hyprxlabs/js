@@ -17,7 +17,7 @@
  *
  * Documentation is available on [jsr.io](https://jsr.io/@hyprx/globals/doc)
  *
- * A list of other modules can be found at [github.com/hyprxland/js-hyprx](https://github.com/hyprxland/js-hyprx)
+ * A list of other modules can be found at [github.com/hyprxlabs/js](https://github.com/hyprxlabs/js)
  *
  * ## Usage
  *

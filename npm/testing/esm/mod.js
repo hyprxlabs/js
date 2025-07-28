@@ -11,7 +11,7 @@
  *
  * [![JSR](https://jsr.io/badges/@hyprx/testing)](https://jsr.io/@hyprx/testing)
  * [![npm version](https://badge.fury.io/js/@hyprx%2Ftesting.svg)](https://badge.fury.io/js/@hyprx%2Ftesting)
- * [![GitHub version](https://badge.fury.io/gh/hyperland%2Fjs-hyperx.svg)](https://badge.fury.io/gh/hyperland%2Fjs-hyprx)
+ * [![GitHub version](https://badge.fury.io/gh/hyperland%2Fjs-hyperx.svg)](https://badge.fury.io/gh/hyperland%2Fjs)
  *
  * ## Documentation
  *

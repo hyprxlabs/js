@@ -14,13 +14,13 @@ unicode module.
 
 [![JSR](https://jsr.io/badges/@hyprx/chars)](https://jsr.io/@hyprx/chars)
 [![npm version](https://badge.fury.io/js/@hyprx%2Fchars.svg)](https://badge.fury.io/js/@hyprx%2Fchars)
-[![GitHub version](https://badge.fury.io/gh/hyprxlabs%2Fjs-hyprx.svg)](https://badge.fury.io/gh/hyprxlabs%2Fjs-hyprx)
+[![GitHub version](https://badge.fury.io/gh/hyprxlabs%2Fjs.svg)](https://badge.fury.io/gh/hyprxlabs%2Fjs)
 
 ## Documentation
 
 Documentation is available on [jsr.io](https://jsr.io/@hyprx/chars/doc)
 
-A list of other modules can be found at [github.com/hyprxlabs/js-hyprx](https://github.com/hyprxlabs/js-hyprx)
+A list of other modules can be found at [github.com/hyprxlabs/js](https://github.com/hyprxlabs/js)
 
 ## Usage
 

@@ -10,7 +10,8 @@
         "./assert",
         "./testing",
         "./chars",
-        "./globals"
+        "./globals",
+        "./slices"
     ],
     "publish": {
         "exclude": [

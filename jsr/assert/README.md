@@ -13,7 +13,7 @@ that target multiple JavaScript runtimes.
 
 [![JSR](https://jsr.io/badges/@hyprx/assert)](https://jsr.io/@hyprx/assert)
 [![npm version](https://badge.fury.io/js/@hyprx%2Fassert.svg)](https://badge.fury.io/js/@hyprx%2Fassert)
-[![GitHub version](https://badge.fury.io/gh/hyprxlabs%2Fjs-hyprx.svg)](https://badge.fury.io/gh/hyprxlabs%2Fjs-hyprx)
+[![GitHub version](https://badge.fury.io/gh/hyprxlabs%2Fjs.svg)](https://badge.fury.io/gh/hyprxlabs%2Fjs)
 
 ## Documentation
 
