@@ -1,5 +1,6 @@
 {
   "private": true,
+
   "scripts": {
     "test": "node --test",
     "test:bun": "bun test"
@@ -7,6 +8,7 @@
   "workspaces": [
     "./testing",
     "./assert",
-    "./chars"
+    "./chars",
+    "./globals"
   ]
 }

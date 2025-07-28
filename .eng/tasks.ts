@@ -10,6 +10,7 @@ import { expandGlobSync } from "jsr:@std/fs@1";
 import { blue } from "jsr:@std/fmt@1/colors";
 import { updateModDocumentation } from "./tasks/docs.ts";
 import { updateVersions } from "./tasks/versions.ts";
+import { get } from "node:http";
 task("default", () => {
     console.log("Hello from Hyprx!"); 
 });
@@ -281,8 +282,16 @@ task({
         let args : string[] = ctx.args ?? [];
         const config = getConfig();
         const parsed = parseArgs(args, {
-            boolean: ["deno", "jsr", "node", "all"],   
+            boolean: ["deno", "jsr", "node", "all"],
+            collect: ["project", "glob"],
+            string: ["project", "glob"],
+            alias: {
+                p: "project",
+                g: "glob",
+            }
         })
+
+        console.log("Parsed arguments:", parsed);
 
         args = parsed._ as string[];
 
@@ -299,34 +308,50 @@ task({
         }
 
         console.log("deno", deno, "node", node, "bun", bun);
-        const globs = args.filter((a) => a.includes("*") || a.endsWith(".ts"));
-        const projectsNames = args.filter(a => !globs.includes(a));
-        let projects : Array<Project> = [];
-        if (!parsed.all) {
-            if (projectsNames.length > 0) {
-                projects = await filter(config.projects, projectsNames, false);
-             } else {
-                projects = await filter(config.projects, undefined, true);
-             }
-        } else {
+        const globs = parsed.glob ?? [];
+        const denoGlobs : string[] = [];
+        const nodeGlobs : string[] = [];
+        const projectsNames = parsed.project ?? [];
+
+        for (const arg of parsed.project ?? []) {
+            denoGlobs.push(`${arg}/**/*.test.ts`);
+            nodeGlobs.push(`${arg}/**/*.test.js`);
+        }
+
+        for (const arg of globs) {
+            denoGlobs.push(arg);
+            nodeGlobs.push(arg);
+        }
+
+
+        let projects : Array<Project> = getConfig().projects ?? [];
+        if (projectsNames.length > 0) {
+            projects = await filter(config.projects, projectsNames, false);
+        }
+
+        if (projects.length === 0) {
             projects = config.projects;
         }
+
 
 
         if (deno) {
             console.log("### DENO TESTS ###");
 
-            if (globs.length === 0) {
+            if (denoGlobs.length === 0) {
                 for (const project of projects) {
                     if (project.denoConfig) {
-                        const dir = basename(project.dir);
-                        globs.push(`${dir}/**/*.test.ts`);
+                        const dir = dirname(project.denoConfig);
+                        const base = basename(dir);
+                        denoGlobs.push(`${base}/**/*.test.ts`);
                     }
                 }
             }
 
+            console.log("denoGlobs", denoGlobs);
+
             const cmd = new Deno.Command("deno", {
-                args: ["test", "-A", ...globs],
+                args: ["test", "-A", ...denoGlobs],
                 stdout: "inherit",
                 stderr: "inherit",
                 cwd: jsrDir,
@@ -341,17 +366,19 @@ task({
             console.log("")
             console.log("### NODE TESTS ###");
             globs.length = 0;
-            for (const project of projects) {
-                if (project.packageJson) {
-                    
-                    const dir = dirname(project.packageJson)
-                    const base = basename(dir);
-                    globs.push(`${base}/**/*.test.js`);
+            if (nodeGlobs.length === 0) {
+                for (const project of projects) {
+                    if (project.packageJson) {
+                        const dir = join(projectRootDir, dirname(project.packageJson))
+                        globs.push(`${dir}/**/*.test.js`);
+                    }
                 }
             }
 
+            console.log("nodeGlobs", nodeGlobs);
+
             const cmd = new Deno.Command("node", {
-                args: ["--test", ...globs],
+                args: ["--test", ...nodeGlobs],
                 stdout: "inherit",
                 stderr: "inherit",
                 cwd: npmDir,
@@ -367,34 +394,42 @@ task({
             console.log("")
             console.log("")
             console.log("### BUN TESTS ###");
+            console.log("nodeGlobs", nodeGlobs);
+            if (nodeGlobs.length === 0) {
+                for (const project of projects) {
+                    if (project.packageJson) {
+                        const dir = join(projectRootDir, dirname(project.packageJson))
+                        nodeGlobs.push(`${dir}/**/*.test.js`);
+                    }
+                }
+            }
+
             for (const project of projects) {
                 if (project.packageJson) {
                     console.log("")
                     console.log(blue("# " + (project.id ?? project.name)));
                     const dir = join(projectRootDir, dirname(project.packageJson))
                     console.log("bun test", dir);;
-                    for (const fi of expandGlobSync("**/*.test.js",  { includeDirs: false, root: dir })) {
-                         console.log("bun test", fi.path);
-                        const cmd = new Deno.Command("bun", {
-                            args: ["test", fi.path],
-                            stdout: "inherit",
-                            stderr: "inherit",
-                            cwd: dir,
-                        });
-                        const o = await cmd.output();
-                        if (o.code !== 0) {
-                            
-                            console.error("Failed to run the tests");
-                            Deno.exit(1);
+                    for (const glob of nodeGlobs) {
+                        console.log("glob", npmDir + glob);
+                        for (const fi of expandGlobSync(glob, { includeDirs: false, root: npmDir })) {
+                            console.log("bun test", fi.path);
+                            const cmd = new Deno.Command("bun", {
+                                args: ["test", fi.path],
+                                stdout: "inherit",
+                                stderr: "inherit",
+                                cwd: npmDir,
+                            });
+                            const o = await cmd.output();
+                            if (o.code !== 0) {
+                                console.error("Failed to run the tests");
+                                Deno.exit(1);
+                            }
                         }
-    
-                        console.log("")
                     }
                 }
             }
         }
-
-
     }
 })
 

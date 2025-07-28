@@ -4,41 +4,41 @@ bun = 'latest'
 deno = 'latest'
 
 [tasks.projects-sync]
-run= """
+run = """
 deno run -A ./.eng/main.ts projects:sync
 """
 
 [tasks.docs-mod]
-run= """
+run = """
 deno run -A ./.eng/main.ts docs:mod
 """
 
 [tasks.projects-list]
-run= """
+run = """
 deno run -A ./.eng/main.ts projects:list
 """
 
 [tasks.dnt]
-run= """
+run = """
 deno run -A ./.eng/main.ts dnt
 """
 
 [tasks.fmt]
-run= """
+run = """
 deno run -A ./.eng/main.ts fmt
 """
 
 [tasks.lint]
-run= """
+run = """
 deno run -A ./.eng/main.ts lint
 """
 
 [tasks.test]
-run= """
+run = """
 deno run -A ./.eng/main.ts test
 """
 
 [tasks.update-version]
-run= """
+run = """
 deno run -A ./.eng/main.ts version:update
 """

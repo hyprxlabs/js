@@ -1,17 +1,6 @@
-# Hyprx TypeScript/JavaScript Standard Libraries
+# MIT License
 
-- [@hyprx/assert](./jsr/assert/README.md) - cross runtime assertions based on deno assertions.
-- [@hyprx/chars](./jsr/chars/README.md) - character utilities for TypeScript and JavaScript.
-- [@hyprx/testing](./jsr/testing/README.md) - cross runtime testing wrapper for deno, bun, and node.
-
-## License
-
-Unless otherwise noted in a file or license file within a given package directory
-the following license applies to all files in this repository:
-
-MIT License
-
-Copyright 2022-2025  Hyprx Labs and Hyprx Dev
+Copyright 2022-2025 Hyprx Labs and Hyprx Dev
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the “Software”), to deal in

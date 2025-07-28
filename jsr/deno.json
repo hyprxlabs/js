@@ -9,7 +9,8 @@
     "workspace": [
         "./assert",
         "./testing",
-        "./chars"
+        "./chars",
+        "./globals"
     ],
     "publish": {
         "exclude": [
@@ -18,7 +19,6 @@
             "**/dnt.ts"
         ]
     },
-
     "tasks": {
         "test": {
             "command": "deno run -A ../.eng/main.ts test",

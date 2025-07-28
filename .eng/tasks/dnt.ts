@@ -1,10 +1,11 @@
 import { dirname, isAbsolute, join, resolve } from "jsr:@std/path@1";
-import { exists, copy as copyDir } from "jsr:@std/fs@1";
+import { exists, copy as copyDir, stat, isDir, remove, isFile } from "jsr:@bearz/fs";
 import { DntConfig, getConfig, Project, setConfig  } from "./config.ts";
 import { build, emptyDir, type EntryPoint } from "jsr:@deno/dnt@0.41.3";
 import { npmDir, projectRootDir } from "./paths.ts";
 import { blue } from "jsr:@std/fmt@1/colors";
 import { relative } from "node:path";
+
 
 
 export async function runDnt(projectNames?: string[]) : Promise<void> {
@@ -233,11 +234,13 @@ export async function runDnt(projectNames?: string[]) : Promise<void> {
                 }
 
                 for (const r of rm) {
-                  
+                    console.log("rm", r);
                     const path = resolve(npmProjectDir, r);
-                    if (await exists(path)) {
-                        console.log(blue("rm"), path);
-                        await Deno.remove(path, { recursive: true });
+                    
+                    if (await isDir(path)) {
+                        await remove(path, { recursive: true });
+                    } else if (await isFile(path)) {
+                        await remove(path);
                     }
                 }
 
