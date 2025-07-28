@@ -7,8 +7,8 @@ on:
     tags-ignore:
       - "*"
     paths:
-      - "@jsr/**"
-      - "@npm/**"
+      - "jsr/**"
+      - "npm/**"
       - ".github/workflows/ci.yaml"
 
 jobs:
