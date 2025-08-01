@@ -8,7 +8,7 @@
  * ## Basic Usage
  *
  * ```typescript
- * import { RUNTIME, BUN, DENO, NODE, BROWSER, CLOUDFLARE } from "@hyprx/runtime-info/js";
+ * import { RUNTIME, BUN, DENO, NODE, BROWSER, CLOUDFLARE } from "@hyprx/globals/js";
  *
  * console.log(RUNTIME);
  * console.log("bun", BUN);

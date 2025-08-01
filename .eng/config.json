@@ -105,6 +105,24 @@
       "denoConfig": "jsr/flags/deno.json",
       "packageJson": "npm/flags/package.json",
       "dntConfig": "jsr/flags/dnt.json"
+    },
+    {
+      "name": "process",
+      "id": "@hyprx/process",
+      "version": "0.0.0-alpha.0",
+      "dir": "jsr/process",
+      "denoConfig": "jsr/process/deno.json",
+      "packageJson": "npm/process/package.json",
+      "dntConfig": "jsr/process/dnt.json"
+    },
+    {
+      "name": "path",
+      "id": "@hyprx/path",
+      "version": "0.0.0-alpha.0",
+      "dir": "jsr/path",
+      "denoConfig": "jsr/path/deno.json",
+      "packageJson": "npm/path/package.json",
+      "dntConfig": "jsr/path/dnt.json"
     }
   ]
 }

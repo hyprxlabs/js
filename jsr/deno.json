@@ -13,7 +13,9 @@
         "./globals",
         "./slices",
         "./strings",
-        "./flags"
+        "./flags",
+        "./process",
+        "./path"
     ],
     "publish": {
         "exclude": [

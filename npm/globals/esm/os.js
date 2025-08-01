@@ -1,13 +1,13 @@
 /**
  * ## Overview
  *
- * @hyprx/runtime-info/os provides constant values for basic os information
+ * @hyprx/globals/os provides constant values for basic os information
  * such as `PLATFORM`, `ARCH`, `WINDOWS`, `DARWIN`, `PATH_SEP`, `DEV_NULL`.
  *
  * ## Basic Usage
  *
  * ```typescript
- * import * as os from "@hyprx/runtime-info/os";
+ * import * as os from "@hyprx/globals/os";
  *
  * console.log(os.PLATFORM);
  * console.log(os.ARCH);

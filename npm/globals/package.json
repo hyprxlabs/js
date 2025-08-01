@@ -41,7 +41,7 @@
         "default": "./esm/os.js"
       }
     },
-    "./runtime-info": {
+    "./runtime": {
       "import": {
         "types": "./types/runtime_info.d.ts",
         "default": "./esm/runtime_info.js"

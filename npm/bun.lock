@@ -22,7 +22,6 @@
       "version": "0.0.0-alpha.0",
       "devDependencies": {
         "@types/node": "^22.14.1",
-        "picocolors": "^1.0.0",
       },
     },
     "globals": {
@@ -31,6 +30,30 @@
       "devDependencies": {
         "@hyprx/assert": "^0.0.0-alpha.0",
         "@hyprx/testing": "^0.0.0-alpha.0",
+      },
+    },
+    "path": {
+      "name": "@hyprx/path",
+      "version": "0.0.0-alpha.0",
+      "dependencies": {
+        "@hyprx/chars": "^0.0.0-alpha.0",
+        "@hyprx/globals": "^0.0.0-alpha.0",
+      },
+      "devDependencies": {
+        "@hyprx/assert": "^0.0.0-alpha.0",
+        "@hyprx/testing": "^0.0.0-alpha.0",
+      },
+    },
+    "process": {
+      "name": "@hyprx/process",
+      "version": "0.0.0-alpha.0",
+      "dependencies": {
+        "@hyprx/globals": "^0.0.0-alpha.0",
+      },
+      "devDependencies": {
+        "@hyprx/assert": "^0.0.0-alpha.0",
+        "@hyprx/testing": "^0.0.0-alpha.0",
+        "picocolors": "^1.0.0",
       },
     },
     "slices": {
@@ -72,6 +95,10 @@
     "@hyprx/flags": ["@hyprx/flags@workspace:flags"],
 
     "@hyprx/globals": ["@hyprx/globals@workspace:globals"],
+
+    "@hyprx/path": ["@hyprx/path@workspace:path"],
+
+    "@hyprx/process": ["@hyprx/process@workspace:process"],
 
     "@hyprx/slices": ["@hyprx/slices@workspace:slices"],
 

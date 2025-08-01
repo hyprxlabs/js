@@ -11,6 +11,8 @@
     "./globals",
     "./slices",
     "./strings",
-    "./flags"
+    "./flags",
+    "./process",
+    "./path"
   ]
 }
