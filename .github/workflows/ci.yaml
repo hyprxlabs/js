@@ -40,6 +40,10 @@ jobs:
         run: bun install
         working-directory: npm
 
+      - name: Deno Install
+        run: deno install
+        working-directory: jsr
+
       - name: Test
         run: deno run -A ./.eng/main.ts test --all
 

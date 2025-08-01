@@ -318,8 +318,11 @@ if (globals.Deno) {
         },
     };
 } else if (globals.process) {
+    // @ts-types="npm:@types/node@^22.17.0"
     const process = globals.process as NodeJS.Process;
+    // @ts-types="npm:@types/node@^22.17.0"
     const fs = await import("node:fs");
+    // @ts-types="npm:@types/node@^22.17.0"
     const tty = await import("node:tty");
 
     // deno-lint-ignore no-inner-declarations

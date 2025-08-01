@@ -64,12 +64,11 @@ export interface InspectOptions {
 // deno-lint-ignore no-explicit-any
 function getNodeUtil(): any {
     if (globals.process && globals.process.getBuiltinModule) {
-        // @ts-types="npm:@types/node@^22.17.0"
         return globals.process.getBuiltinModule("node:util");
     }
     if (globals.Bun) {
         try {
-            // @ts-types="npm:@types/node@^22.17.0"
+            // @ts-ignore ignore 
             const utils = require("node:util");
             return utils;
         } catch (_) {
