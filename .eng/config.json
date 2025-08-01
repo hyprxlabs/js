@@ -96,6 +96,15 @@
       "denoConfig": "jsr/strings/deno.json",
       "packageJson": "npm/strings/package.json",
       "dntConfig": "jsr/strings/dnt.json"
+    },
+    {
+      "name": "flags",
+      "id": "@hyprx/flags",
+      "version": "0.0.0-alpha.0",
+      "dir": "jsr/flags",
+      "denoConfig": "jsr/flags/deno.json",
+      "packageJson": "npm/flags/package.json",
+      "dntConfig": "jsr/flags/dnt.json"
     }
   ]
 }

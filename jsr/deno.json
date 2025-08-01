@@ -12,7 +12,8 @@
         "./chars",
         "./globals",
         "./slices",
-        "./strings"
+        "./strings",
+        "./flags"
     ],
     "publish": {
         "exclude": [

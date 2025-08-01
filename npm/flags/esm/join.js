@@ -1,0 +1,102 @@
+import { WINDOWS } from "@hyprx/globals/os";
+import { isSpace } from "@hyprx/chars/is-space";
+function containsWindowsSpecialChars(value) {
+  const set = [];
+  for (let i = 0; i < value.length; i++) {
+    const c = value.codePointAt(i);
+    // space or double quote
+    if (c === 32 || c === 34) { // double quote, single quote, backslash
+      return { found: true, codePoints: undefined };
+    }
+    set.push(c ?? 0);
+  }
+  return { found: false, codePoints: set };
+}
+function containsSpecialChars(value) {
+  const set = [];
+  for (let i = 0; i < value.length; i++) {
+    const c = value.codePointAt(i) ?? 0;
+    // space, double quote, single quote, backslash
+    if (c === 36 || c === 96 || c === 34 || c === 92 || c === 39 || isSpace(c)) { // dollar sign, backtick, double quote, backslash, single quote
+      return { found: true, codePoints: undefined };
+    }
+    set.push(c ?? 0);
+  }
+  return { found: false, codePoints: set };
+}
+/**
+ * Joins command arguments into a single string.
+ * @param args The command arguments to join.
+ * @returns The joined command arguments.
+ */
+export function join(args) {
+  const sb = [];
+  if (WINDOWS) {
+    for (const arg of args) {
+      if (sb.length > 0) {
+        sb.push(32); // space character
+      }
+      const { found, codePoints } = containsWindowsSpecialChars(arg);
+      if (found) {
+        let backslashCount = 0;
+        sb.push(34); // open double quote
+        for (let i = 0; i < arg.length; i++) {
+          const c = arg.codePointAt(i);
+          switch (c) {
+            // backslash
+            case 92:
+              backslashCount++;
+              sb.push(c);
+              continue;
+            // double quote
+            case 34: {
+              const times = (backslashCount * 2) + 1;
+              backslashCount = 0;
+              sb.push(...Array(times).fill(92), c);
+              sb.push(34); // close double quote
+              continue;
+            }
+            default:
+              if (backslashCount > 0) {
+                if (backslashCount === 1) {
+                  sb.push(92);
+                } else {
+                  sb.push(...Array(backslashCount).fill(92));
+                }
+                backslashCount = 0;
+              }
+              sb.push(c ?? 0);
+              continue;
+          }
+        }
+        sb.push(34); // close double quote
+      } else {
+        sb.push(...(codePoints ?? []));
+      }
+    }
+    return String.fromCodePoint(...sb);
+  }
+  console.log("join: unix args", args);
+  for (let i = 0; i < args.length; i++) {
+    if (sb.length > 0) {
+      sb.push(32); // space character
+    }
+    const c = args[i];
+    const { found, codePoints } = containsSpecialChars(c);
+    if (!found) {
+      sb.push(...(codePoints ?? []));
+      continue;
+    }
+    sb.push(34); // open double quote
+    for (let j = 0; j < c.length; j++) {
+      const k = c.codePointAt(j);
+      // dollar sign, backtick, double quote, backslash
+      if (k === 36 || k === 96 || k === 34 || k === 92) {
+        sb.push(92); // add backslash before special character
+      }
+      sb.push(k ?? 0);
+    }
+    sb.push(34); // close double quote
+  }
+  return String.fromCodePoint(...sb);
+}
