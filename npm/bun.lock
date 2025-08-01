@@ -24,6 +24,19 @@
         "@types/node": "^22.14.1",
       },
     },
+    "fmt": {
+      "name": "@hyprx/fmt",
+      "version": "0.0.0-alpha.0",
+      "dependencies": {
+        "@hyprx/globals": "^0.0.0-alpha.0",
+        "@hyprx/process": "^0.0.0-alpha.0",
+      },
+      "devDependencies": {
+        "@hyprx/assert": "^0.0.0-alpha.0",
+        "@hyprx/testing": "^0.0.0-alpha.0",
+        "picocolors": "^1.0.0",
+      },
+    },
     "globals": {
       "name": "@hyprx/globals",
       "version": "0.0.0-alpha.0",
@@ -53,7 +66,6 @@
       "devDependencies": {
         "@hyprx/assert": "^0.0.0-alpha.0",
         "@hyprx/testing": "^0.0.0-alpha.0",
-        "picocolors": "^1.0.0",
       },
     },
     "slices": {
@@ -93,6 +105,8 @@
     "@hyprx/chars": ["@hyprx/chars@workspace:chars"],
 
     "@hyprx/flags": ["@hyprx/flags@workspace:flags"],
+
+    "@hyprx/fmt": ["@hyprx/fmt@workspace:fmt"],
 
     "@hyprx/globals": ["@hyprx/globals@workspace:globals"],
 

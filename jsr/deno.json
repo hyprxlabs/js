@@ -15,7 +15,8 @@
         "./strings",
         "./flags",
         "./process",
-        "./path"
+        "./path",
+        "./fmt"
     ],
     "publish": {
         "exclude": [

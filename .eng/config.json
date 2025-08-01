@@ -123,6 +123,15 @@
       "denoConfig": "jsr/path/deno.json",
       "packageJson": "npm/path/package.json",
       "dntConfig": "jsr/path/dnt.json"
+    },
+    {
+      "name": "fmt",
+      "id": "@hyprx/fmt",
+      "version": "0.0.0-alpha.0",
+      "dir": "jsr/fmt",
+      "denoConfig": "jsr/fmt/deno.json",
+      "packageJson": "npm/fmt/package.json",
+      "dntConfig": "jsr/fmt/dnt.json"
     }
   ]
 }
