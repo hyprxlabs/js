@@ -488,39 +488,58 @@ task({
             let failed = false;
             const promises: Array<Promise<void>> = [];
 
-            for (const project of projects) {
-                if (project.packageJson) {
- 
-                    for (const glob of nodeGlobs) {
-                        for await (const fi of expandGlob(glob, { includeDirs: false, root: npmDir })) {
-                           
-                            const cmd = new Deno.Command("bun", {
-                                args: ["test", fi.path],
-                                stdout: "inherit",
-                                stderr: "inherit",
-                                cwd: npmDir,
-                            });
-                            promises.push(cmd.output().then((o) => {
-                                if (o.code !== 0) {
-                                    console.error("Bun test failed for", fi.path);
-                                    failed = true;
-                                }
-                            }));
+            if (Deno.build.os === "windows") {
+                for (const glob of nodeGlobs) {
+                    for await (const fi of expandGlob(glob, { includeDirs: false, root: npmDir })) {
+
+                        const cmd = new Deno.Command("bun", {
+                            args: ["test", fi.path],
+                            stdout: "inherit",
+                            stderr: "inherit",
+                            cwd: npmDir,
+                        });
+
+                        // bun crashes on windows if too many commands are run at once
+                        const o = await cmd.output();
+                        if (o.code !== 0) {
+                            console.error("Bun test failed for", fi.path);
+                            failed = true;
                         }
                     }
                 }
+            } else {
 
-                if (promises.length === 10) {
+                for (const glob of nodeGlobs) {
+                    for await (const fi of expandGlob(glob, { includeDirs: false, root: npmDir })) {
+
+                        const cmd = new Deno.Command("bun", {
+                            args: ["test", fi.path],
+                            stdout: "inherit",
+                            stderr: "inherit",
+                            cwd: npmDir,
+                        });
+                        promises.push(cmd.output().then((o) => {
+                            if (o.code !== 0) {
+                                console.error("Bun test failed for", fi.path);
+                                failed = true;
+                            }
+                        }));
+                    }
+
+                    if (promises.length === 30) {
+                        await Promise.all(promises);
+                        promises.length = 0;
+                    }
+                }
+            
+                if (promises.length === 30) {
                     await Promise.all(promises);
                     promises.length = 0;
                 }
             }
 
-            if (promises.length > 0) {
-                await Promise.all(promises);
-            }
-
             if (failed) {
+                console.error("Bun tests failed");
                 Deno.exit(1);
             }
         }

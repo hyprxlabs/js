@@ -9,6 +9,7 @@ on:
     paths:
       - "jsr/**"
       - "npm/**"
+      - ".eng/**"
       - ".github/workflows/ci.yaml"
 
 jobs:
