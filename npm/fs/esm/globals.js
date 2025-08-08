@@ -18,7 +18,6 @@ export function loadFs() {
   return undefined;
 }
 export function loadFsAsync() {
-  
   if (globals.process && globals.process.getBuiltinModule) {
     return globals.process.getBuiltinModule("node:fs/promises");
   } else if (globals.Bun && typeof require !== "undefined") {

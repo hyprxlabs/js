@@ -33,7 +33,8 @@ export function remove(
     }
 
     return fnAsync(path, { ...options }).catch((err) => {
-        if ((err as Error & { code: string }).code === "ERR_FS_EISDIR") {
+        const code = (err as Error & { code: string }).code;
+        if (code === "ERR_FS_EISDIR") {
             if (!rmDirAsync) {
                 rmDirAsync = loadFsAsync()?.rmdir;
                 if (!rmDirAsync) {
@@ -42,7 +43,7 @@ export function remove(
             }
 
             return rmDirAsync(path);
-        } else if (globals.Bun && (err as Error & { code: string }).code === "EFAULT") {
+        } else if (globals.Bun && (code === "EFAULT" || code === "EACCES")) {
             // Bun specific error handling
             if (!rmDirAsync) {
                 rmDirAsync = loadFsAsync()?.rmdir;
