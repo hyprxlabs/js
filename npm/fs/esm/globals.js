@@ -14,7 +14,6 @@ export function loadFs() {
       // Ignore error
     }
   }
-  console.log("require", globals.require);
   return undefined;
 }
 export function loadFsAsync() {

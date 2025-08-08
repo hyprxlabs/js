@@ -18,8 +18,6 @@ export function loadFs(): typeof import("node:fs") | undefined {
         }
     }
 
-    console.log("require", globals.require);
-
     return undefined;
 }
 

@@ -141,6 +141,15 @@
       "denoConfig": "jsr/fs/deno.json",
       "packageJson": "npm/fs/package.json",
       "dntConfig": "jsr/fs/dnt.json"
+    },
+    {
+      "name": "env",
+      "id": "@hyprx/env",
+      "version": "0.0.0-alpha.0",
+      "dir": "jsr/env",
+      "denoConfig": "jsr/env/deno.json",
+      "packageJson": "npm/env/package.json",
+      "dntConfig": "jsr/env/dnt.json"
     }
   ]
 }

@@ -1,6 +1,12 @@
 {
-  "name": "@hyprx/flags",
+  "name": "@hyprx/env",
   "version": "0.0.0-alpha.0",
+  "description": "The env provides a uniform way to work with environment variables and the path variable across different runtimes and operating systems.",
+  "keywords": [
+    "env",
+    "path",
+    "environment-variables"
+  ],
   "homepage": "js.hyprxlabs.com",
   "repository": {
     "type": "git",
@@ -19,22 +25,16 @@
         "default": "./esm/mod.js"
       }
     },
-    "./split": {
+    "./expand": {
       "import": {
-        "types": "./types/split.d.ts",
-        "default": "./esm/split.js"
+        "types": "./types/expand.d.ts",
+        "default": "./esm/expand.js"
       }
     },
-    "./splat": {
+    "./export": {
       "import": {
-        "types": "./types/splat.d.ts",
-        "default": "./esm/splat.js"
-      }
-    },
-    "./join": {
-      "import": {
-        "types": "./types/join.d.ts",
-        "default": "./esm/join.js"
+        "types": "./types/export.d.ts",
+        "default": "./esm/export.js"
       }
     }
   },
@@ -46,8 +46,15 @@
   "engines": {
     "node": ">=22"
   },
+  "dependencies": {
+    "@hyprx/globals": "^0.0.0-alpha.0",
+    "@hyprx/flags": "^0.0.0-alpha.0",
+    "@hyprx/chars": "^0.0.0-alpha.0",
+    "@hyprx/strings": "^0.0.0-alpha.0"
+  },
   "devDependencies": {
-    "@types/node": "^22.14.1"
+    "@hyprx/testing": "^0.0.0-alpha.0",
+    "@hyprx/assert": "^0.0.0-alpha.0"
   },
   "_generatedBy": "dnt@dev"
 }

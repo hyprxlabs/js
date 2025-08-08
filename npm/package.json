@@ -1,20 +1,21 @@
 {
-  "private": true,
-  "scripts": {
-    "test": "node --test",
-    "test:bun": "bun test"
-  },
-  "workspaces": [
-    "./testing",
-    "./assert",
-    "./chars",
-    "./globals",
-    "./slices",
-    "./strings",
-    "./flags",
-    "./process",
-    "./path",
-    "./fmt",
-    "./fs"
-  ]
+    "private": true,
+    "scripts": {
+        "test": "node --test",
+        "test:bun": "bun test"
+    },
+    "workspaces": [
+        "./testing",
+        "./assert",
+        "./chars",
+        "./globals",
+        "./slices",
+        "./strings",
+        "./flags",
+        "./process",
+        "./path",
+        "./fmt",
+        "./fs",
+        "./env"
+    ]
 }
