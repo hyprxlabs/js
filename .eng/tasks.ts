@@ -509,9 +509,17 @@ task({
                         }
                     }
                 }
+
+                if (promises.length === 10) {
+                    await Promise.all(promises);
+                    promises.length = 0;
+                }
             }
 
-            await Promise.all(promises);
+            if (promises.length > 0) {
+                await Promise.all(promises);
+            }
+
             if (failed) {
                 Deno.exit(1);
             }
