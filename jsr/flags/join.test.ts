@@ -1,61 +1,50 @@
 import { test } from "@hyprx/testing";
 import { equal } from "@hyprx/assert";
-import { join } from "./join.ts";
-import process from "node:process";
-test("flags::join simple args", () => {
-    equal(join(["echo", "hello", "world"]), "echo hello world");
+import { join, unixJoin, windowsJoin } from "./join.ts";
+
+test("flags::windowsJoin joins simple args without special chars", () => {
+    equal(windowsJoin(["foo", "bar", "baz"]), "foo bar baz");
 });
 
-test("flags::join args with spaces", () => {
-    equal(join(["echo", "hello world"]), 'echo "hello world"');
+test("flags::windowsJoin joins args with spaces", () => {
+    equal(windowsJoin(["foo", "bar baz"]), 'foo "bar baz"');
+});
+test("flags::windowsJoin joins args with double quotes", () => {
+    equal(windowsJoin(["foo", 'bar"baz']), 'foo "bar\\"baz"');
 });
 
-test("flags::join args with quotes, unix", () => {
-    if (process.platform === "win32") {
-        equal(join(["echo", 'he"llo']), 'echo he\\"llo');
-    } else {
-        equal(join(["echo", 'he"llo']), 'echo "he\\"llo"');
-    }
-
-    equal(join(["echo", 'he"llo']), 'echo "he\\"llo"');
+test("flags::windowsJoin joins args with backslashes", () => {
+    equal(windowsJoin(["foo", "bar\\baz"]), "foo bar\\baz");
 });
 
-test("flags::join args with single quote, unix", () => {
-    equal(join(["echo", "he'llo"]), 'echo "he\'llo"');
+test("flags::windowsJoin joins args with multiple backslashes before quote", () => {
+    equal(windowsJoin(["foo", 'bar\\\\\\"baz']), 'foo "bar\\\\\\\\\\\\\\"baz"');
 });
 
-test("flags::join args with backslash, unix", () => {
-    equal(join(["echo", "he\\llo"]), 'echo "he\\\\llo"');
+test("flags::unixJoin joins simple args without special chars", () => {
+    equal(unixJoin(["foo", "bar", "baz"]), "foo bar baz");
 });
 
-test("flags::join args with dollar, backtick, unix", () => {
-    if (process.platform === "win32") {
-        equal(join(["echo", "he$llo", "he`llo"]), "echo he$llo he`llo");
-    } else {
-        equal(join(["echo", "he$llo", "he`llo"]), 'echo "he\\$llo" "he\\`llo"');
-    }
+test("flags::unixJoin joins args with spaces", () => {
+    equal(unixJoin(["foo", "bar baz"]), 'foo "bar baz"');
 });
 
-test("flags::join simple args, windows", () => {
-    equal(join(["echo", "hello", "world"]), "echo hello world");
+test("flags::unixJoin joins args with double quotes", () => {
+    equal(unixJoin(["foo", 'bar"baz']), 'foo "bar\\"baz"');
 });
 
-test("flags::join args with spaces, windows", () => {
-    equal(join(["echo", "hello world"]), 'echo "hello world"');
+test("flags::unixJoin joins args with dollar sign and backtick", () => {
+    equal(unixJoin(["foo", "bar$`baz"]), 'foo "bar\\$\\`baz"');
 });
 
-test("flags::join args with double quote, windows", () => {
-    equal(join(["echo", 'he"llo']), 'echo "he\\"llo"');
+test("flags::unixJoin joins args with backslashes", () => {
+    equal(unixJoin(["foo", "bar\\baz"]), 'foo "bar\\\\baz"');
 });
 
-test("flags::join args with backslash, windows", () => {
-    equal(join(["echo", "he\\llo"]), 'echo "he\\\\llo"');
+test("flags::join joins simple args without special chars", () => {
+    equal(join(["foo", "bar", "baz"]), "foo bar baz");
 });
 
-test("flags::join args with double quote and backslash, windows", () => {
-    equal(join(["echo", 'he\\"llo']), 'echo "he\\\\\\"llo"');
-});
-
-test("flags::join empty args", () => {
-    equal(join([]), "");
+test("flags::join joins args with spaces", () => {
+    equal(join(["foo", "bar baz"]), 'foo "bar baz"');
 });

@@ -24,61 +24,65 @@ function containsSpecialChars(value) {
   }
   return { found: false, codePoints: set };
 }
-/**
- * Joins command arguments into a single string.
- * @param args The command arguments to join.
- * @returns The joined command arguments.
- */
-export function join(args) {
+export function windowsJoin(args) {
   const sb = [];
-  if (WINDOWS) {
-    for (const arg of args) {
-      if (sb.length > 0) {
-        sb.push(32); // space character
-      }
-      const { found, codePoints } = containsWindowsSpecialChars(arg);
-      if (found) {
-        let backslashCount = 0;
-        sb.push(34); // open double quote
-        for (let i = 0; i < arg.length; i++) {
-          const c = arg.codePointAt(i);
-          switch (c) {
-            // backslash
-            case 92:
-              backslashCount++;
-              sb.push(c);
-              continue;
-            // double quote
-            case 34: {
-              const times = (2 * backslashCount) + 1;
-              backslashCount = 0;
-              if (times > 0) {
-                sb.push(...Array(times).fill(92), c);
-              }
-              sb.push(34); // close double quote
-              continue;
-            }
-            default:
-              if (backslashCount > 0) {
-                if (backslashCount === 1) {
-                  sb.push(92);
-                } else {
-                  sb.push(...Array(backslashCount).fill(92));
-                }
-                backslashCount = 0;
-              }
-              sb.push(c ?? 0);
-              continue;
+  for (const arg of args) {
+    if (sb.length > 0) {
+      sb.push(32); // space character
+    }
+    const { found, codePoints } = containsWindowsSpecialChars(arg);
+    if (!found) {
+      sb.push(...(codePoints ?? []));
+      continue;
+    }
+    let backslashCount = 0;
+    sb.push(34); // open double quote
+    for (let i = 0; i < arg.length; i++) {
+      const c = arg.codePointAt(i);
+      switch (c) {
+        // backslash
+        case 92:
+          backslashCount++;
+          continue;
+        // double quote
+        case 34: {
+          const times = (2 * backslashCount) + 1;
+          backslashCount = 0;
+          if (times > 0) {
+            sb.push(...Array(times).fill(92));
           }
+          sb.push(34); // close double quote
+          continue;
         }
-        sb.push(34); // close double quote
-      } else {
-        sb.push(...(codePoints ?? []));
+        default:
+          if (backslashCount > 0) {
+            if (backslashCount === 1) {
+              sb.push(92);
+            } else {
+              sb.push(...Array(backslashCount).fill(92));
+            }
+            backslashCount = 0;
+          }
+          sb.push(c ?? 0);
+          continue;
       }
     }
-    return String.fromCodePoint(...sb);
+    if (backslashCount > 0) {
+      if (backslashCount === 1) {
+        sb.push(92);
+      } else {
+        sb.push(...Array(backslashCount).fill(92));
+      }
+      backslashCount = 0;
+    }
+    sb.push(34); // close double quote
   }
-  console.log("join: unix args", args);
+  const ret = String.fromCodePoint(...sb);
+  sb.length = 0; // clear the buffer
+  return ret;
+}
+export function unixJoin(args) {
+  const sb = [];
   for (let i = 0; i < args.length; i++) {
     if (sb.length > 0) {
       sb.push(32); // space character
@@ -100,5 +104,15 @@ export function join(args) {
     }
     sb.push(34); // close double quote
   }
-  return String.fromCodePoint(...sb);
+  const ret = String.fromCodePoint(...sb);
+  sb.length = 0; // clear the buffer
+  return ret;
+}
+/**
+ * Joins command arguments into a single string.
+ * @param args The command arguments to join.
+ * @returns The joined command arguments.
+ */
+export function join(args) {
+  return WINDOWS ? windowsJoin(args) : unixJoin(args);
 }
