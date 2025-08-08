@@ -23,7 +23,6 @@ A list of other modules can be found at [github.com/hyprxlabs/js](https://github
 ```typescript
 import { makeDir, writeTextFile, remove } from "@hyprx/fs"
 
-
 await makeDir("/home/my_user/test");
 await writeTextFile("/home/my_user/test/log.txt",  "ello");
 await remove("/home/my_user/test", { recursive: true });
