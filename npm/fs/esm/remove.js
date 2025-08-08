@@ -66,14 +66,15 @@ export function removeSync(path, options) {
   try {
     fn(path, { ...options });
   } catch (err) {
-    if (err.code === "ERR_FS_EISDIR") {
+    const code = err.code;
+    if (code === "ERR_FS_EISDIR") {
       if (!rmDir) {
         rmDir = loadFs()?.rmdirSync;
         if (!rmDir) {
           throw new Error("No suitable file system module found.");
         }
       }
-    } else if (globals.Bun && err.code === "EFAULT") {
+    } else if (globals.Bun && (code === "EFAULT" || code === "EACCES")) {
       // Bun specific error handling
       if (!rmDir) {
         rmDir = loadFs()?.rmdirSync;

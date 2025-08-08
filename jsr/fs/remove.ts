@@ -78,14 +78,15 @@ export function removeSync(path: string | URL, options?: RemoveOptions): void {
     try {
         fn(path, { ...options });
     } catch (err) {
-        if ((err as Error & { code: string }).code === "ERR_FS_EISDIR") {
+        const code = (err as Error & { code: string }).code;
+        if (code === "ERR_FS_EISDIR") {
             if (!rmDir) {
                 rmDir = loadFs()?.rmdirSync;
                 if (!rmDir) {
                     throw new Error("No suitable file system module found.");
                 }
             }
-        } else if (globals.Bun && (err as Error & { code: string }).code === "EFAULT") {
+        } else if (globals.Bun && (code === "EFAULT" || code === "EACCES")) {
             // Bun specific error handling
             if (!rmDir) {
                 rmDir = loadFs()?.rmdirSync;
