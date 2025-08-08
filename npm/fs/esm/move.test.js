@@ -47,6 +47,9 @@ test("fs::move() creates dest dir if it does not exist", async function () {
 test("fs::move() creates dest dir if it does not exist and overwrite option is set to true", async function () {
   const srcDir = path.join(testdataDir, "move_test_src_2");
   const destDir = path.join(testdataDir, "move_test_dest_2");
+  if (await existsAsync(destDir)) {
+    await remove(destDir);
+  }
   await makeDir(srcDir, { recursive: true });
   try {
     // if dest directory not exist
@@ -180,6 +183,9 @@ test("fs::moveSync() throws if src dir does not exist", function () {
 test("fs::moveSync() creates dest dir if it does not exist", function () {
   const srcDir = path.join(testdataDir, "move_sync_test_src_2");
   const destDir = path.join(testdataDir, "move_sync_test_dest_2");
+  if (existsSync(destDir)) {
+    removeSync(destDir);
+  }
   makeDirSync(srcDir, { recursive: true });
   // if dest directory not exist
   throws(
