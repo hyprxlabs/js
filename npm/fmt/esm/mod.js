@@ -4,22 +4,23 @@
  * A module for formatting strings using sprintf, printf, print, printLn, printfLn, errorf, and inspect
  * functions that works for Deno, Node, Bun, and the browser.
  *
- * ![logo](https://raw.githubusercontent.com/hyprxland/js-hyprx/refs/heads/main/assets/logo.png)
+ * ![logo](https://raw.githubusercontent.com/hyprxlabs/js/refs/heads/main/assets/logo.png)
  *
  * [![JSR](https://jsr.io/badges/@hyprx/fmt)](https://jsr.io/@hyprx/fmt)
  * [![npm version](https://badge.fury.io/js/@hyprx%2Ffmt.svg)](https://badge.fury.io/js/@hyprx%2Ffmt)
- * [![GitHub version](https://badge.fury.io/gh/hyprxland%2Fjs-hyprx.svg)](https://badge.fury.io/gh/hyprxland%2Fjs-hyprx)
+ * [![GitHub version](https://badge.fury.io/gh/hyprxlabs%2Fjs.svg)](https://badge.fury.io/gh/hyprxlabs%2Fjs)
  *
  * ## Documentation
  *
  * Documentation is available on [jsr.io](https://jsr.io/@hyprx/fmt/doc)
  *
- * A list of other modules can be found at [github.com/hyprxland/js-hyprx](https://github.com/hyprxland/js-hyprx)
+ * A list of other modules can be found at [github.com/hyprxlabs/js](https://github.com/hyprxlabs/js)
  *
  * ### Basic Usage
  *
  * ```typescript
- * import { sprintf, printf, print, printLn, } from "@hyprx/fmt/printf"
+ * import { sprintf, printf, print, echo, } from "@hyprx/fmt"
+ * import { chdir, cwd, execPath, args } from "@hyprx/process";
  *
  * const message = sprintf("Hello %s", "world");
  * print(message)
@@ -28,20 +29,20 @@
  * printf("Hello %s", "world");
  *
  * print("test");
- * printLn("")
- * printLn(chdir("../"));
- * printLn(cwd());
- * printLn(execPath);
- * printLn(args.join(" "))
+ * echo("")
+ * echo(chdir("../"));
+ * echo(cwd());
+ * echo(execPath);
+ * echo(args.join(" "))
  * ```
  *
  * ## Functions
  *
  * - `sprintf` - formats a string using posix style string formatting.
- * - `printf` - formats and prints the string to the standard output.
- * - `print` - prints a string to the standard output.
- * - `printLn` - prints a string to the standard output and writes a new line after.
- * - `printfLn` - prints a string using posix style string formatting and writes a new line after.
+ * - `print` - formats and prints the string to the standard output.
+ * - `printf` - prints a string to the standard output.
+ * - `echo` - prints a string to the standard output and writes a new line after.
+ * - `echof` - prints a string using posix style string formatting and writes a new line after.
  * - `errorf`  - creates a new error using posix style formatted string.
  * - `inspect` - creates a string representation of the value(s) passed to it.
  *               Powered by util.inspect, Deno.inspect or Json.parse.
@@ -52,7 +53,7 @@
  * The `@std/fmt` module uses `Deno.inspect` and `Deno.stdout.writeSync` for printf
  * which is not available in bun, node, or the browser.
  *
- * The `@hyprx/fmt` module makes modifications to `@std/fmt`.
+ * The `@hyprx/fmt` module makes modifications to the `@std/fmt` module.
  *
  * For inspect or the `/I` flag inspect uses `Deno.inspect`,
  * `util.inspect` or falls back to `json.parse`.  **A browsify fallback may

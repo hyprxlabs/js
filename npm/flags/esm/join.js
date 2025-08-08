@@ -50,9 +50,11 @@ export function join(args) {
               continue;
             // double quote
             case 34: {
-              const times = (backslashCount * 2) + 1;
+              const times = (2 * backslashCount) + 1;
               backslashCount = 0;
-              sb.push(...Array(times).fill(92), c);
+              if (times > 0) {
+                sb.push(...Array(times).fill(92), c);
+              }
               sb.push(34); // close double quote
               continue;
             }

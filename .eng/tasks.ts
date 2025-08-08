@@ -5,12 +5,11 @@ import { jsrDir, npmDir, projectRootDir } from "./tasks/paths.ts";
 import { parseArgs } from "jsr:@std/cli@1"
 import { getConfig, Project } from "./tasks/config.ts";
 import { dirname } from "jsr:@std/path@1";
-import { basename, join, resolve } from "node:path";
+import { basename, join } from "node:path";
 import { expandGlobSync } from "jsr:@std/fs@1";
 import { blue } from "jsr:@std/fmt@1/colors";
 import { updateModDocumentation } from "./tasks/docs.ts";
 import { updateVersions } from "./tasks/versions.ts";
-import { get } from "node:http";
 task("default", () => {
     console.log("Hello from Hyprx!"); 
 });
@@ -22,6 +21,88 @@ task({
         await syncProjects();
     },
 });
+
+task({
+    id: "projects:update",
+    async run(ctx) {
+        const parsed = parseArgs(ctx.args ?? [], {
+            boolean: ["all"],
+        });
+
+        const projects = getConfig().projects;
+        let projectNames: Array<string> | undefined = undefined;
+
+        if (parsed.all || (ctx.args && (ctx.args.includes("--all")))) {
+            projectNames = projects.map((p) => p.name);
+        } else {
+            projectNames = [];
+            for (const arg of ctx.args!) {
+                const project = projects.find((p) => p.name === arg);
+                if (project) {
+                    projectNames.push(project.name);
+                }
+            }
+        }
+
+        console.log("")
+        console.log("### UPDATE MOD DOCS ###");
+        await updateModDocumentation(projectNames);
+
+        console.log("")
+        console.log("### DENO NPM TRANSPILER ###");
+        await runDnt(projectNames);
+
+        let deno = true;
+        let node = true;
+        if (ctx.args && ctx.args.includes("--jsr") || ctx.args?.includes("--deno")) {
+            node = false;
+        }
+
+        if (ctx.args && ctx.args.includes("--node")) {
+            deno = false;
+        }
+
+        console.log("deno", deno, "node", node);
+
+        if (deno) {
+            console.log("")
+            console.log(blue("### FMT JSR ###"));
+            for (const project of projectNames) {
+                const cmd = new Deno.Command("deno", {
+                    args: ["fmt"],
+                    stdout: "inherit",
+                    stderr: "inherit",
+                    cwd: join(jsrDir, project),
+                });
+                const o = await cmd.output();
+                if (o.code !== 0) {
+                    throw new Error("Failed to format the jsr code");
+                }
+            }
+
+           
+        }
+
+        if (node) {
+            console.log("")
+            console.log(blue("### FMT NPM ###"));
+
+            for( const project of projectNames) {
+                const cmd = new Deno.Command("deno", {
+                    args: ["fmt", ".", "--line-width", "100", "indent-width", "4", "--ignore=node_modules,**/*.md"],
+                    stdout: "inherit",
+                    stderr: "inherit",
+                    cwd: join(npmDir, project),
+                })
+
+                const o = await cmd.output();
+                if (o.code !== 0) {
+                    throw new Error("Failed to format the npm code");
+                }
+            }
+        }
+    }
+})
 
 task({
     id: "docs:mod",

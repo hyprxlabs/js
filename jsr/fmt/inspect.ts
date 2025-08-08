@@ -68,7 +68,7 @@ function getNodeUtil(): any {
     }
     if (globals.Bun) {
         try {
-            // @ts-ignore ignore 
+            // @ts-ignore ignore
             const utils = require("node:util");
             return utils;
         } catch (_) {

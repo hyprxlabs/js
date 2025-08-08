@@ -8,7 +8,14 @@ run = """
 deno run -A ./.eng/main.ts projects:sync
 """
 
-[tasks.docs-mod]
+
+[tasks.projects-update]
+run = """
+deno run -A ./.eng/main.ts projects:update
+"""
+
+
+[tasks.doc-mod]
 run = """
 deno run -A ./.eng/main.ts docs:mod
 """

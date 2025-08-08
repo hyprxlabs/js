@@ -1,3 +1,4 @@
+// @deno-ig
 import { test } from "@hyprx/testing";
 import { fail, stringIncludes } from "@hyprx/assert";
 import { BUN, DENO, globals, NODE } from "@hyprx/globals";

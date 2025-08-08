@@ -1,26 +1,23 @@
-// Copyright 2018-2025 the Deno authors. MIT license.
-// Copyright the Browserify authors. MIT License.
-// Ported mostly from https://github.com/browserify/path-browserify/
-// This module is browser compatible.
-
 /**
+ * ## Overview
+ *
  * Path utilties for operating system file paths that is a re-package
  * of the [@std/path](https://jsr.io/@std/path) module with minor
  * changes to enable it to work in node and bun.
  *
- * @std/path which is based upon [browsify's implementation of path](https://github.com/browserify/path-browserify/tree/master).
+ * Deno's @std/path is based upon [browsify's implementation of path](https://github.com/browserify/path-browserify/tree/master).
  *
- * ![logo](https://raw.githubusercontent.com/hyprxland/js-hyprx/refs/heads/main/assets/logo.png)
+ * ![logo](https://raw.githubusercontent.com/hyprxlabs/js/refs/heads/main/assets/logo.png)
  *
  * [![JSR](https://jsr.io/badges/@hyprx/path)](https://jsr.io/@hyprx/path)
  * [![npm version](https://badge.fury.io/js/@hyprx%2Fpath.svg)](https://badge.fury.io/js/@hyprx%2Fpath)
- * [![GitHub version](https://badge.fury.io/gh/hyprxland%2Fjs-hyprx.svg)](https://badge.fury.io/gh/hyprxland%2Fjs-hyprx)
+ * [![GitHub version](https://badge.fury.io/gh/hyprxlabs%2Fjs.svg)](https://badge.fury.io/gh/hyprxlabs%2Fjs)
  *
  * ## Documentation
  *
  * Documentation is available on [jsr.io](https://jsr.io/@hyprx/path/doc)
  *
- * A list of other modules can be found at [github.com/hyprxland/js-hyprx](https://github.com/hyprxland/js-hyprx)
+ * A list of other modules can be found at [github.com/hyprxlabs/js](https://github.com/hyprxlabs/js)
  *
  * ## Usage
  *
@@ -65,6 +62,11 @@
  * @hyprx/path is repackaging @std/path to enable it for node/bun and avoid a depdendency on jsr
  * when shipping @hyprx modules to npm avoid issues with shimming between @std/path
  * and `node:path` and include the extra methods such as `toFileUrl` and `fromFileUrl`.
+ *
+ * ## License
+ *
+ * [MIT License](./LICENSE.md)
+ *
  * @module
  */
 export * from "./basename.ts";

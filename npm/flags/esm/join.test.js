@@ -2,13 +2,18 @@ import { test } from "@hyprx/testing";
 import { equal } from "@hyprx/assert";
 import { join } from "./join.js";
 import process from "node:process";
-test("flags::join simple args, unix", () => {
+test("flags::join simple args", () => {
   equal(join(["echo", "hello", "world"]), "echo hello world");
 });
-test("flags::join args with spaces, unix", () => {
+test("flags::join args with spaces", () => {
   equal(join(["echo", "hello world"]), 'echo "hello world"');
 });
 test("flags::join args with quotes, unix", () => {
+  if (process.platform === "win32") {
+    equal(join(["echo", 'he"llo']), 'echo he\\"llo');
+  } else {
+    equal(join(["echo", 'he"llo']), 'echo "he\\"llo"');
+  }
   equal(join(["echo", 'he"llo']), 'echo "he\\"llo"');
 });
 test("flags::join args with single quote, unix", () => {
