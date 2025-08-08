@@ -6,7 +6,7 @@ import { parseArgs } from "jsr:@std/cli@1"
 import { getConfig, Project } from "./tasks/config.ts";
 import { dirname } from "jsr:@std/path@1";
 import { basename, join } from "node:path";
-import { expandGlobSync } from "jsr:@std/fs@1";
+import { expandGlob, expandGlobSync } from "jsr:@std/fs@1";
 import { blue } from "jsr:@std/fmt@1/colors";
 import { updateModDocumentation } from "./tasks/docs.ts";
 import { updateVersions } from "./tasks/versions.ts";
@@ -388,7 +388,7 @@ task({
             bun = false;
         }
 
-        console.log("deno", deno, "node", node, "bun", bun);
+
         const globs = parsed.glob ?? [];
         const denoGlobs : string[] = [];
         const nodeGlobs : string[] = [];
@@ -485,30 +485,35 @@ task({
                 }
             }
 
+            let failed = false;
+            const promises: Array<Promise<void>> = [];
+
             for (const project of projects) {
                 if (project.packageJson) {
-                    console.log("")
-                    console.log(blue("# " + (project.id ?? project.name)));
-                    const dir = join(projectRootDir, dirname(project.packageJson))
-                    console.log("bun test", dir);;
+ 
                     for (const glob of nodeGlobs) {
-                        console.log("glob", npmDir + glob);
-                        for (const fi of expandGlobSync(glob, { includeDirs: false, root: npmDir })) {
-                            console.log("bun test", fi.path);
+                        for await (const fi of expandGlob(glob, { includeDirs: false, root: npmDir })) {
+                           
                             const cmd = new Deno.Command("bun", {
                                 args: ["test", fi.path],
                                 stdout: "inherit",
                                 stderr: "inherit",
                                 cwd: npmDir,
                             });
-                            const o = await cmd.output();
-                            if (o.code !== 0) {
-                                console.error("Failed to run the tests");
-                                Deno.exit(1);
-                            }
+                            promises.push(cmd.output().then((o) => {
+                                if (o.code !== 0) {
+                                    console.error("Bun test failed for", fi.path);
+                                    failed = true;
+                                }
+                            }));
                         }
                     }
                 }
+            }
+
+            await Promise.all(promises);
+            if (failed) {
+                Deno.exit(1);
             }
         }
     }

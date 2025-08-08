@@ -24,10 +24,6 @@ export function loadFs(): typeof import("node:fs") | undefined {
 }
 
 export function loadFsAsync(): typeof import("node:fs/promises") | undefined {
-    if (globals.Bun) {
-        console.log("bun", true);
-        console.log(globals.require);
-    }
     if (globals.process && globals.process.getBuiltinModule) {
         return globals.process.getBuiltinModule(
             "node:fs/promises",
