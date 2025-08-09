@@ -30,7 +30,6 @@
         "@hyprx/assert": "^0.0.0-alpha.0",
         "@hyprx/testing": "^0.0.0-alpha.0",
         "@types/node": "^22.14.1",
-        "picocolors": "^1.0.0",
       },
     },
     "env": {
@@ -128,6 +127,19 @@
         "@hyprx/testing": "^0.0.0-alpha.0",
       },
     },
+    "secrets": {
+      "name": "@hyprx/secrets",
+      "version": "0.0.0-alpha.0",
+      "dependencies": {
+        "@hyprx/chars": "^0.0.0-alpha.0",
+        "@hyprx/globals": "^0.0.0-alpha.0",
+      },
+      "devDependencies": {
+        "@hyprx/assert": "^0.0.0-alpha.0",
+        "@hyprx/testing": "^0.0.0-alpha.0",
+        "picocolors": "^1.0.0",
+      },
+    },
     "slices": {
       "name": "@hyprx/slices",
       "version": "0.0.0-alpha.0",
@@ -181,6 +193,8 @@
     "@hyprx/path": ["@hyprx/path@workspace:path"],
 
     "@hyprx/process": ["@hyprx/process@workspace:process"],
+
+    "@hyprx/secrets": ["@hyprx/secrets@workspace:secrets"],
 
     "@hyprx/slices": ["@hyprx/slices@workspace:slices"],
 

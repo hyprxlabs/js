@@ -168,6 +168,15 @@
       "denoConfig": "jsr/dotenv/deno.json",
       "packageJson": "npm/dotenv/package.json",
       "dntConfig": "jsr/dotenv/dnt.json"
+    },
+    {
+      "name": "secrets",
+      "id": "@hyprx/secrets",
+      "version": "0.0.0-alpha.0",
+      "dir": "jsr/secrets",
+      "denoConfig": "jsr/secrets/deno.json",
+      "packageJson": "npm/secrets/package.json",
+      "dntConfig": "jsr/secrets/dnt.json"
     }
   ]
 }

@@ -18,6 +18,7 @@
         "./fs",
         "./env",
         "./exec",
-        "./dotenv"
+        "./dotenv",
+        "./secrets"
     ]
 }
