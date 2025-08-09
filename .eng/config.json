@@ -150,6 +150,15 @@
       "denoConfig": "jsr/env/deno.json",
       "packageJson": "npm/env/package.json",
       "dntConfig": "jsr/env/dnt.json"
+    },
+    {
+      "name": "exec",
+      "id": "@hyprx/exec",
+      "version": "0.0.0-alpha.0",
+      "dir": "jsr/exec",
+      "denoConfig": "jsr/exec/deno.json",
+      "packageJson": "npm/exec/package.json",
+      "dntConfig": "jsr/exec/dnt.json"
     }
   ]
 }
