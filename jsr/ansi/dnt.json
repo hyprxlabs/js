@@ -1,0 +1,20 @@
+{
+    "description": "The ansi module provides color detection, writing ansi, codes, and an ansi writer.",
+    "keywords": [
+        "ansi",
+        "terminal",
+        "color",
+        "format",
+        "color-detection"
+    ],
+    "devDependencies": {
+        "@hyprx/testing": "workspace: *",
+        "@hyprx/assert": "workspace: *"
+    },
+    "dependencies": {
+        "@hyprx/globals": "workspace: *",
+        "@hyprx/chars": "workspace: *",
+        "@hyprx/env": "workspace: *",
+        "@hyprx/process": "workspace: *"
+    }
+}

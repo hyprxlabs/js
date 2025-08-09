@@ -2,6 +2,21 @@
   "lockfileVersion": 1,
   "workspaces": {
     "": {},
+    "ansi": {
+      "name": "@hyprx/ansi",
+      "version": "0.0.0-alpha.0",
+      "dependencies": {
+        "@hyprx/chars": "^0.0.0-alpha.0",
+        "@hyprx/env": "^0.0.0-alpha.0",
+        "@hyprx/globals": "^0.0.0-alpha.0",
+        "@hyprx/process": "^0.0.0-alpha.0",
+      },
+      "devDependencies": {
+        "@hyprx/assert": "^0.0.0-alpha.0",
+        "@hyprx/testing": "^0.0.0-alpha.0",
+        "picocolors": "^1.0.0",
+      },
+    },
     "assert": {
       "name": "@hyprx/assert",
       "version": "0.0.0-alpha.0",
@@ -137,7 +152,6 @@
       "devDependencies": {
         "@hyprx/assert": "^0.0.0-alpha.0",
         "@hyprx/testing": "^0.0.0-alpha.0",
-        "picocolors": "^1.0.0",
       },
     },
     "slices": {
@@ -172,6 +186,8 @@
     },
   },
   "packages": {
+    "@hyprx/ansi": ["@hyprx/ansi@workspace:ansi"],
+
     "@hyprx/assert": ["@hyprx/assert@workspace:assert"],
 
     "@hyprx/chars": ["@hyprx/chars@workspace:chars"],

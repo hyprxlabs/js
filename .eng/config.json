@@ -177,6 +177,15 @@
       "denoConfig": "jsr/secrets/deno.json",
       "packageJson": "npm/secrets/package.json",
       "dntConfig": "jsr/secrets/dnt.json"
+    },
+    {
+      "name": "ansi",
+      "id": "@hyprx/ansi",
+      "version": "0.0.0-alpha.0",
+      "dir": "jsr/ansi",
+      "denoConfig": "jsr/ansi/deno.json",
+      "packageJson": "npm/ansi/package.json",
+      "dntConfig": "jsr/ansi/dnt.json"
     }
   ]
 }
