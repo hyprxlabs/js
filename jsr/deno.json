@@ -19,7 +19,8 @@
         "./fmt",
         "./fs",
         "./env",
-        "./exec"
+        "./exec",
+        "./dotenv"
     ],
     "imports": {
         "@types/node": "npm:@types/node@^22.17.0"

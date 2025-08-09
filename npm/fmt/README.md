@@ -5,7 +5,7 @@
 A module for formatting strings using sprintf, printf, print, printLn, printfLn, errorf, and inspect
 functions that works for Deno, Node, Bun, and the browser.
 
-![logo](https://raw.githubusercontent.com/hyprxlabs/js/refs/heads/main/assets/logo.png)
+![logo](https://raw.githubusercontent.com/hyprxlabs/js/refs/heads/main/.eng/assets/logo.png)
 
 [![JSR](https://jsr.io/badges/@hyprx/fmt)](https://jsr.io/@hyprx/fmt)
 [![npm version](https://badge.fury.io/js/@hyprx%2Ffmt.svg)](https://badge.fury.io/js/@hyprx%2Ffmt)

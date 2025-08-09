@@ -6,7 +6,7 @@ The fs module provides a modern file system API that works in Deno,
 Bun, and NodeJs to promote creating cross-runtime packages/modules
 for TypeScript/JavaScript.  
 
-![logo](https://raw.githubusercontent.com/hyprxlabs/js/refs/heads/main/assets/logo.png)
+![logo](https://raw.githubusercontent.com/hyprxlabs/js/refs/heads/main/.eng/assets/logo.png)
 
 [![JSR](https://jsr.io/badges/@hyprx/fs)](https://jsr.io/@hyprx/fs)
 [![npm version](https://badge.fury.io/js/@hyprx%2Ffs.svg)](https://badge.fury.io/js/@hyprx%2Fjs)

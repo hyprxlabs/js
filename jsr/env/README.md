@@ -19,7 +19,7 @@ command substitution. Command substitution is disabled by default
 and must be enabled by passing the `commandSubstitution` option to the
 `expand` method.
 
-![logo](https://raw.githubusercontent.com/hyprxlabs/js/refs/heads/main/assets/logo.png)
+![logo](https://raw.githubusercontent.com/hyprxlabs/js/refs/heads/main/.eng/assets/logo.png)
 
 [![JSR](https://jsr.io/badges/@hyprx/env)](https://jsr.io/@hyprx/env)
 [![npm version](https://badge.fury.io/js/@hyprx%2Fenv.svg)](https://badge.fury.io/js/@hyprx%2Fenv)

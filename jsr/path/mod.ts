@@ -7,7 +7,7 @@
  *
  * Deno's @std/path is based upon [browsify's implementation of path](https://github.com/browserify/path-browserify/tree/master).
  *
- * ![logo](https://raw.githubusercontent.com/hyprxlabs/js/refs/heads/main/assets/logo.png)
+ * ![logo](https://raw.githubusercontent.com/hyprxlabs/js/refs/heads/main/.eng/assets/logo.png)
  *
  * [![JSR](https://jsr.io/badges/@hyprx/path)](https://jsr.io/@hyprx/path)
  * [![npm version](https://badge.fury.io/js/@hyprx%2Fpath.svg)](https://badge.fury.io/js/@hyprx%2Fpath)

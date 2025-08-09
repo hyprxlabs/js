@@ -7,7 +7,7 @@ different runtimes (NodeJS, Bun, Deno) and different operating
 systems (Windows, Linux, Mac) and include additional utilities
 like splatting arguments and looking up executables on the path.
 
-![logo](https://raw.githubusercontent.com/hyprxlabs/js/refs/heads/main/assets/logo.png)
+![logo](https://raw.githubusercontent.com/hyprxlabs/js/refs/heads/main/.eng/assets/logo.png)
 
 [![JSR](https://jsr.io/badges/@hyprx/exec)](https://jsr.io/@hyprx/exec)
 [![npm version](https://badge.fury.io/js/@hyprx%2Fexec.svg)](https://badge.fury.io/js/@hyprx%2Fexec)

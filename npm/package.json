@@ -17,6 +17,7 @@
         "./fmt",
         "./fs",
         "./env",
-        "./exec"
+        "./exec",
+        "./dotenv"
     ]
 }
